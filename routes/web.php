@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsermanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,12 @@ Route::get('/', function () {
     return redirect('dashboard');
 });
 
+Route::get('login', [LoginController::class, 'index']);
+Route::post('login', [LoginController::class, 'authenticate'])->name('login');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('dashboard', [DashboardController::class, 'index']);
+
+Route::get('user-management/account', [UsermanController::class, 'account']);
+Route::get('user-management/account/add', [UsermanController::class, 'addAccount']);
+Route::post('user-management/account/add', [UsermanController::class, 'addAccountStore']);

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['title' => 'Dashboard'])
+@extends('layouts.main', ['title' => $title ])
  
 <!-- isi bagian konten -->
 <!-- cara penulisan isi section yang panjang -->
