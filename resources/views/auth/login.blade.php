@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login J99 Admin</title>
+  <title>Login | J99 Trans Admin</title>
   <link rel="icon" type="image/x-icon" href="{{asset('assets/images/logo/tab_icon.png')}}">
 
   <!-- Google Font: Source Sans Pro -->
