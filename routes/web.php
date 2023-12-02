@@ -26,11 +26,11 @@ Route::post('login', [LoginController::class, 'authenticate'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index']);
+    // Route::get('dashboard', [DashboardController::class, 'index']);
     
-    Route::get('user-management/account', [UsermanController::class, 'account']);
-    Route::get('user-management/account/add', [UsermanController::class, 'addAccount']);
-    Route::post('user-management/account/add', [UsermanController::class, 'addAccountStore']);
+    // Route::get('user-management/account', [UsermanController::class, 'account']);
+    // Route::get('user-management/account/add', [UsermanController::class, 'addAccount']);
+    // Route::post('user-management/account/add', [UsermanController::class, 'addAccountStore']);
 });
 
 

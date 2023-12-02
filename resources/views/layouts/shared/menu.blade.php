@@ -5,7 +5,7 @@
         <p>Dashboard</p>
       </a>
     </li>
-    <li class="nav-item {{ (request()->segment(1) == 'user-management') ? 'menu-open' : '' }}">
+    <li class="nav-item {{ (request()->segment(1) == 'usermanagement') ? 'menu-open' : '' }}">
       <a href="#" class="nav-link  {{ (request()->segment(1) == 'user-management') ? 'active' : '' }}">
         <i class="nav-icon fas fa-users"></i>
         <p>
@@ -15,7 +15,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{{ url('user-management/account') }}" class="nav-link {{ (request()->segment(2) == 'account') ? 'active' : '' }}">
+          <a href="{{ url('usermanagement/account') }}" class="nav-link {{ (request()->segment(2) == 'account') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Account</p>
           </a>

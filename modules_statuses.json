@@ -1,0 +1,6 @@
+{
+    "Blog": true,
+    "ContentManagement": true,
+    "UserManagement": true,
+    "Dashboard": true
+}
