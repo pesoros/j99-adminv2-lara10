@@ -14,6 +14,6 @@ use Modules\Dashboard\app\Http\Controllers\DashboardController;
 |
 */
 
-Route::group([], function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
 });

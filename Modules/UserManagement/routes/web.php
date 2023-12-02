@@ -14,7 +14,7 @@ use Modules\UserManagement\app\Http\Controllers\UserManagementController;
 |
 */
 
-Route::group([], function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('usermanagement/account', [UserManagementController::class, 'index']);
     Route::get('usermanagement/account/add', [UserManagementController::class, 'addAccount']);
 });

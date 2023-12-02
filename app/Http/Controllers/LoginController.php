@@ -9,6 +9,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect()->intended('dashboard');
+        }
         return view('auth.login');
     }
     
@@ -19,10 +22,12 @@ class LoginController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $validateAuth = Auth::attempt($credentials);
+        echo $validateAuth;
+        if ($validateAuth) {
             $request->session()->regenerate();
 
-            return redirect()->intended('home');
+            return redirect()->intended('dashboard');
         };
 
         return back()->withErrors(['email']);

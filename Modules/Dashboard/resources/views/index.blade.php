@@ -4,9 +4,10 @@
 <!-- cara penulisan isi section yang panjang -->
 @section('content')
  
-<!-- Small boxes (Stat box) -->
-<div class="row">
-    <p>dashboard</p>
-</div><!-- /.container-fluid -->
+<div class="row mb-2">
+    <div class="col-sm-12">
+        <h2>Welcome {{ auth()->user()->name }} | {{ auth()->user()->email }}</h2>
+    </div>
+</div>
  
 @endsection
