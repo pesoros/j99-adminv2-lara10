@@ -7,6 +7,7 @@
 <div class="row mb-2">
     <div class="col-sm-12">
         <h2>Welcome {{ auth()->user()->name }} | {{ auth()->user()->email }}</h2>
+        {{ trimString("Hello", "...", 3)}}
     </div>
 </div>
  

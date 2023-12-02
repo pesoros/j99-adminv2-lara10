@@ -26,6 +26,9 @@ class LoginController extends Controller
         echo $validateAuth;
         if ($validateAuth) {
             $request->session()->regenerate();
+            
+            $menu = getMenu();
+            $request->session()->put('menu_session', $menu);
 
             return redirect()->intended('dashboard');
         };

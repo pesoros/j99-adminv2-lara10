@@ -14,7 +14,7 @@ class UserManagementController extends Controller
     public function index()
     {
         $data['title'] = 'Akun';
-        $data ['list']= User::select('name','email')->get();
+        $data['list']= User::select('name','email')->get();
 
         return view('usermanagement::index', $data);
     }
