@@ -10,6 +10,6 @@
   <!-- Right navbar links -->
 <ul class="navbar-nav ml-auto">
   <li class="nav-item">
-    <a href="#" class="nav-link">Log Out</a>
+    <a href="{{ url('logout') }}" class="nav-link">Log Out</a>
   </li>
 </ul>
