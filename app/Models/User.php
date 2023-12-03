@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'uuid',
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -42,4 +45,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function scopeGetUserList($query)
+    {
+        $query = DB::table("users")
+            ->select('users.uuid','users.name','users.email','users.role_id','role.title as rolename')
+            ->join("v2_role AS role", "role.id", "=", "users.role_id")
+            ->get();
+
+        return $query;
+    }
 }

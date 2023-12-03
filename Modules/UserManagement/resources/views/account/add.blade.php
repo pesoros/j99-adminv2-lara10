@@ -34,7 +34,7 @@
   </div>
   <!-- /.card-header -->
   <!-- form start -->
-    <form action="{{ url('user-management/account/add') }}" method="post">
+    <form action="{{ url('usermanagement/account/add') }}" method="post">
       @csrf
     <div class="card-body">
       <div class="form-group">
@@ -49,11 +49,22 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
       </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select class="form-control select2bs4" name="role" style="width: 100%;">
+          @foreach ($roles as $role)
+              <option value="{{ $role->id }}" @selected(old('role_id') == $role)>
+                  {{ $role->title }}
+              </option>
+          @endForeach
+        </select>
+      </div>
     </div>
     <!-- /.card-body -->
 
     <div class="card-footer">
       <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="{{ url('usermanagement/account') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>
     </div>
   </form>
 </div>

@@ -14,20 +14,24 @@
       <table id="datatable-def" class="table table-bordered table-striped">
         <thead>
         <tr>
+          <th>No</th>
           <th>Nama</th>
           <th>Email</th>
+          <th>Role</th>
           <th>Aksi</th>
         </tr>
         </thead>
         <tbody>
-          @foreach ($list as $value)
+          @foreach ($list as $key => $value)
             <tr>
+              <td width="20" class="text-center">{{ $key + 1 }}</td>
               <td>{{ $value->name }}</td>
               <td>{{ $value->email }}</td>
+              <td>{{ $value->rolename }}</td>
               <td>
                 <div class="btn-group btn-block">
-                  <a href="#" class="btn btn-success btn-sm"><i class="fa fa-success"></i> Edit</a>
-                  <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-danger"></i> Hapus</a>
+                  <a href="#" class="btn btn-success btn-sm">Edit</a>
+                  <a href="#" onclick="return confirm('Anda yakin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a>
                 </div>
               </td>
             </tr>

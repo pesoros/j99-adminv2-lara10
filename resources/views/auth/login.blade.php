@@ -24,13 +24,13 @@
         <img src="{{asset('assets/images/logo/j99-logo-wide.png')}}" alt="J99 Logo" height="38" style="opacity: .8">
     </div>
     <div class="card-body">
-      @error('email')
+      @if($errors->any())
         <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <h5><i class="icon fas fa-ban"></i> Error!</h5>
-          Email atau Password Anda salah
+          {{ $errors->first() }}
         </div>
-      @enderror
+      @endif
       <form action="{{ route('login') }}" method="post" autocomplete=off>
         @csrf
         <div class="input-group mb-3">

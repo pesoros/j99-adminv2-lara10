@@ -1,7 +1,7 @@
 <nav class="mt-2">
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     @foreach (Session('menu_session') as $menu)
-      @if (!$menu->child)
+      @if (!isset($menu->child))
         <li class="nav-item {{ (request()->segment(1) ==  $menu->url) ? 'menu-open' : '' }}">
           <a href="{{ url($menu->url) }}" class="nav-link {{ (request()->segment(1) == $menu->url) ? 'active' : '' }}">
             {!! $menu->icon !!}

@@ -13,6 +13,6 @@
   <!-- Right navbar links -->
 <ul class="navbar-nav ml-auto">
   <li class="nav-item">
-    <a href="{{ url('logout') }}" class="nav-link">Log Out</a>
+    <a href="{{ url('logout') }}" onclick="return confirm('Anda yakin mau keluar dari admin J99?')" class="nav-link">Log Out</a>
   </li>
 </ul>

@@ -23,17 +23,22 @@ class LoginController extends Controller
         ]);
 
         $validateAuth = Auth::attempt($credentials);
-        echo $validateAuth;
+
         if ($validateAuth) {
             $request->session()->regenerate();
-            
-            $menu = getMenu();
+
+            $roleInfo = getUserRoleInfo($request->email);
+            $menu = getMenu($roleInfo->role_id);
+            $roleAccess = getRoleAccess($roleInfo->role_id);
+
             $request->session()->put('menu_session', $menu);
+            $request->session()->put('roleaccess_session', $roleAccess);
+            $request->session()->put('role_name', $roleInfo->title);
 
             return redirect()->intended('dashboard');
         };
 
-        return back()->withErrors(['email']);
+        return back()->withErrors(['messages' => 'Email atau Password Anda salah']);
     }
 
     public function logout()
