@@ -23,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id',
+        'role_uuid',
     ];
 
     /**
@@ -49,8 +49,9 @@ class User extends Authenticatable
     public function scopeGetUserList($query)
     {
         $query = DB::table("users")
-            ->select('users.uuid','users.name','users.email','users.role_id','role.title as rolename')
-            ->join("v2_role AS role", "role.id", "=", "users.role_id")
+            ->select('users.uuid','users.name','users.email','users.role_uuid','role.title as rolename')
+            ->join("v2_role AS role", "role.uuid", "=", "users.role_uuid")
+            ->orderBy('users.created_at')
             ->get();
 
         return $query;

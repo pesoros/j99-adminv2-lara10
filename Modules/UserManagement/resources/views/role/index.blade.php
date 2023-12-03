@@ -24,7 +24,7 @@
         <tbody>
           @foreach ($list as $key => $value)
             <tr>
-              <td width="20" class="text-center">{{ $key + 1 }}</td>
+              <td width="20" class="text-center">{{ intval($key) + 1 }}</td>
               <td>{{ $value->title }}</td>
               <td>{{ $value->slug }}</td>
               <td>{{ $value->description }}</td>

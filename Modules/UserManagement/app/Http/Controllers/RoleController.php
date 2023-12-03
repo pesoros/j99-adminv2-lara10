@@ -56,12 +56,32 @@ class RoleController extends Controller
             foreach ($value->access as $keyAccess => $valueAccess) {
                 $permission = Role::getPermission($value->slug, $valueAccess->name);
                 $rolePermission = property_exists($permission, 'permid') ? Role::getRolePermission($permission->permid, $role_uuid) : false;
+                $valueAccess->permissionId = property_exists($permission, 'permid') ? $permission->permid : '-';
                 $valueAccess->isAvailable = property_exists($permission, 'permid');
                 $valueAccess->isGranted = $rolePermission;
             }
         }
         $data['permissionList'] = $permissionList;
-        
+
         return view('usermanagement::role.permission', $data);
+    }
+
+    public function permissionStore(Request $request, $role_uuid)
+    {
+        $data = [];
+        $roleId = Role::getRoleId($role_uuid);
+        foreach ($request->permission as $key => $value) {
+            $data[$key]['role_uuid'] = $roleId->roleid;
+            $data[$key]['permission_id'] = $value;
+        }
+
+        $remove = Role::deleteRolePermission($roleId->roleid);
+        $save = Role::saveRolePermission($data);
+        
+        if ($save) {
+            return back()->with('success', 'Akses role berhasil diubah!');
+        }
+
+        return back()->with('failed', 'Akses role gagal diubah!');        
     }
 }

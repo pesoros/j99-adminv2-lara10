@@ -33,7 +33,7 @@ class LoginController extends Controller
 
             $request->session()->put('menu_session', $menu);
             $request->session()->put('roleaccess_session', $roleAccess);
-            $request->session()->put('role_name', $roleInfo->title);
+            $request->session()->put('role_info', $roleInfo);
 
             return redirect()->intended('dashboard');
         };

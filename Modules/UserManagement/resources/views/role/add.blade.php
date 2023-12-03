@@ -34,8 +34,8 @@
   </div>
   <!-- /.card-header -->
   <!-- form start -->
-    <form action="{{ url('usermanagement/role/add') }}" method="post">
-      @csrf
+  <form action="{{ url()->current() }}" method="post">
+    @csrf
     <div class="card-body">
       <div class="form-group">
         <label for="rolename">Nama</label>
@@ -46,8 +46,6 @@
         <textarea class="form-control" name="description" rows="3" placeholder="Masukkan deskripsi role"></textarea>
       </div>
     </div>
-    <!-- /.card-body -->
-
     <div class="card-footer">
       <button type="submit" class="btn btn-primary">Submit</button>
       <a href="{{ url('usermanagement/role') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>

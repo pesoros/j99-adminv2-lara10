@@ -40,7 +40,7 @@ class AccountController extends Controller
             'uuid' => generateUuid(),
             'name' => $request->name,
             'email' => $request->email,
-            'role_id' => $request->role,
+            'role_uuid' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 

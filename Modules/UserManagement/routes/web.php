@@ -16,11 +16,14 @@ use Modules\UserManagement\app\Http\Controllers\RoleController;
 */
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('usermanagement/account', [AccountController::class, 'listAccount']);
-    Route::get('usermanagement/account/add', [AccountController::class, 'addAccount']);
-    Route::post('usermanagement/account/add', [AccountController::class, 'addAccountStore']);
-    Route::get('usermanagement/role', [RoleController::class, 'listRole']);
-    Route::get('usermanagement/role/add', [RoleController::class, 'addRole']);
-    Route::post('usermanagement/role/add', [RoleController::class, 'addRoleStore']);
-    Route::get('usermanagement/role/permission/{role_uuid}', [RoleController::class, 'permissionForm']);
+    Route::prefix('usermanagement')->group(function () {
+        Route::get('account', [AccountController::class, 'listAccount']);
+        Route::get('account/add', [AccountController::class, 'addAccount']);
+        Route::post('account/add', [AccountController::class, 'addAccountStore']);
+        Route::get('role', [RoleController::class, 'listRole']);
+        Route::get('role/add', [RoleController::class, 'addRole']);
+        Route::post('role/add', [RoleController::class, 'addRoleStore']);
+        Route::get('role/permission/{role_uuid}', [RoleController::class, 'permissionForm']);
+        Route::post('role/permission/{role_uuid}', [RoleController::class, 'permissionStore']);
+    });
 });

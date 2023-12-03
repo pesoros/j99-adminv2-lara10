@@ -38,7 +38,7 @@
   </div>
   <!-- /.card-header -->
   <!-- form start -->
-    <form action="{{ url('usermanagement/account/add') }}" method="post">
+    <form action="{{ url()->current() }}" method="post">
       @csrf
         <div class="card-body">
           <div class="row">
@@ -61,22 +61,21 @@
                       <td>{{ $key + 1 }}</td>
                       <td>{{ $item->title }}</td>
                       @foreach ($item->access as $keyAccess => $itemAccess)
-                        @if ($itemAccess->isAvailable)
-                          <td class="text-center">
-                            <div class="icheck-success d-inline">
-                              <input 
-                                type="checkbox" 
-                                id="{{ $item->slug.'-'.$itemAccess->name }}" 
-                                {{ $itemAccess->isGranted ? 'checked' : '' }} 
-                              >
-                              <label for="{{ $item->slug.'-'.$itemAccess->name }}">
-                                {{ $accessName[$keyAccess] }}
-                              </label>
-                            </div>
-                          </td>                            
-                        @else
-                          <td></td>
-                        @endif
+                        <td class="text-center">
+                          <div class="icheck-success d-inline">
+                            <input 
+                              type="checkbox" 
+                              id="{{ $item->slug.'_'.$itemAccess->name }}" 
+                              name="permission[]" 
+                              value="{{ $itemAccess->permissionId }}"
+                              {{ $itemAccess->isGranted ? 'checked' : '' }} 
+                              {{ !$itemAccess->isAvailable ? 'disabled=""' : '' }}
+                            >
+                            <label for="{{ $item->slug.'_'.$itemAccess->name }}">
+                              {{ $accessName[$keyAccess] }}
+                            </label>
+                          </div>
+                        </td>
                       @endforeach
                     </tr>
                   @endforeach
@@ -89,7 +88,7 @@
 
     <div class="card-footer">
       <button type="submit" class="btn btn-primary">Submit</button>
-      <a href="{{ url('usermanagement/account') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>
+      <a href="{{ url('usermanagement/role') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>
     </div>
   </form>
 </div>

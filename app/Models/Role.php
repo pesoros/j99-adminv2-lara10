@@ -20,7 +20,7 @@ class Role extends Model
         $query = DB::table("v2_role")
             ->select('uuid','title','slug','description')
             ->where('status', 1)
-            // ->where('slug','!=', 'super-user')
+            ->where('slug','!=', 'super-user')
             ->orderBy('created_at')
             ->get();
 
@@ -64,11 +64,36 @@ class Role extends Model
     public function scopeGetRolePermission($query, $id, $role_uuid)
     {
         $query = DB::table("v2_role_permission as roleperm")
-            ->select('roleperm.id')
-            ->join("v2_role AS role", "role.id", "=", "roleperm.role_id")
+            ->join("v2_role AS role", "role.id", "=", "roleperm.role_uuid")
             ->where('roleperm.permission_id', $id)
             ->where('role.uuid', $role_uuid)
             ->exists();
+
+        return $query;
+    }
+
+    public function scopeGetRoleId($query, $role_uuid)
+    {
+        $query = DB::table("v2_role")
+            ->select('id as roleid')
+            ->where('uuid', $role_uuid)
+            ->first();
+
+        return $query;
+    }
+
+    public function scopeSaveRolePermission($query, $data)
+    {
+        $query = DB::table("v2_role_permission")->insert($data);
+
+        return $query;
+    }
+
+    public function scopeDeleteRolePermission($query, $role_uuid)
+    {
+        $query = DB::table("v2_role_permission")
+            ->where('role_uuid', $role_uuid)
+            ->delete();
 
         return $query;
     }

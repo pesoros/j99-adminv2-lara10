@@ -34,8 +34,8 @@
   </div>
   <!-- /.card-header -->
   <!-- form start -->
-    <form action="{{ url('usermanagement/account/add') }}" method="post">
-      @csrf
+  <form action="{{ url()->current() }}" method="post">
+    @csrf
     <div class="card-body">
       <div class="form-group">
         <label for="name">Nama</label>
@@ -53,15 +53,13 @@
         <label>Role</label>
         <select class="form-control select2bs4" name="role" style="width: 100%;">
           @foreach ($roles as $role)
-              <option value="{{ $role->id }}" @selected(old('role_id') == $role)>
+              <option value="{{ $role->uuid }}" @selected(old('role_uuid') == $role)>
                   {{ $role->title }}
               </option>
           @endForeach
         </select>
       </div>
     </div>
-    <!-- /.card-body -->
-
     <div class="card-footer">
       <button type="submit" class="btn btn-primary">Submit</button>
       <a href="{{ url('usermanagement/account') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>
