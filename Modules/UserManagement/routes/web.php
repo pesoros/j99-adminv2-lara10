@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagement\app\Http\Controllers\AccountController;
 use Modules\UserManagement\app\Http\Controllers\RoleController;
+use Modules\UserManagement\app\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('role/add', [RoleController::class, 'addRoleStore']);
         Route::get('role/permission/{role_uuid}', [RoleController::class, 'permissionForm']);
         Route::post('role/permission/{role_uuid}', [RoleController::class, 'permissionStore']);
+        Route::get('menu', [MenuController::class, 'listMenu']);
+        Route::get('menu/add', [MenuController::class, 'addMenu']);
+        Route::post('menu/add', [MenuController::class, 'addMenuStore']);
     });
 });

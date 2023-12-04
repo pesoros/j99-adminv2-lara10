@@ -20,20 +20,19 @@ class Role extends Model
         $query = DB::table("v2_role")
             ->select('uuid','title','slug','description')
             ->where('status', 1)
-            ->where('slug','!=', 'super-user')
             ->orderBy('created_at')
             ->get();
 
         return $query;
     }
 
-    public function scopeGetMenu($query)
+    public function scopeGetRoleInfo($query, $role_uuid)
     {
-        $query = DB::table("v2_menu")
-            ->select('title','slug')
-            ->where('status', 1)
-            ->orderBy('order')
-            ->get();
+        $query = DB::table("v2_role")
+            ->select('id','uuid','title','slug','description')
+            ->where('uuid', $role_uuid)
+            ->orderBy('created_at')
+            ->first();
 
         return $query;
     }
@@ -61,12 +60,11 @@ class Role extends Model
         return $query;
     }
 
-    public function scopeGetRolePermission($query, $id, $role_uuid)
+    public function scopeGetRolePermission($query, $id, $role_id)
     {
         $query = DB::table("v2_role_permission as roleperm")
-            ->join("v2_role AS role", "role.id", "=", "roleperm.role_uuid")
             ->where('roleperm.permission_id', $id)
-            ->where('role.uuid', $role_uuid)
+            ->where('roleperm.role_id', $role_id)
             ->exists();
 
         return $query;

@@ -8,7 +8,7 @@ function getUserRoleInfo($email, $onlyParent = false)
 
 function getMenu($role_id, $onlyParent = false)
 {
-    $result = App\Models\Menu::getMenu(['role_id' => $role_id]);
+    $result = App\Models\Menu::getMenuWithRole(['role_id' => $role_id]);
 
     if (!$onlyParent) {
         foreach ($result as $key => $value) {

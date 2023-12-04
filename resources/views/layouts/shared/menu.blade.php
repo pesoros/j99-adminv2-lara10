@@ -19,8 +19,13 @@
           </a>
           <ul class="nav nav-treeview">
             @foreach ($menu->child as $child)
+            @php
+                $segmentCheck = (isset(explode("/", $child->url)[1])) 
+                  ? (request()->segment(2) === explode("/", $child->url)[1]) 
+                  : (request()->segment(1)  === $child->url);
+            @endphp
               <li class="nav-item">
-                <a href="{{ url($child->url) }}" class="nav-link {{ (request()->segment(2) == explode("/", $child->url)[1]) ? 'active' : '' }}">
+                <a href="{{ url($child->url) }}" class="nav-link {{ $segmentCheck ? 'active' : '' }}">
                   {!! $child->icon !!}
                   <p>{{ $child->title }}</p>
                 </a>

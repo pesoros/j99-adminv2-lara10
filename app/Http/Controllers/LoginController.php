@@ -27,13 +27,13 @@ class LoginController extends Controller
         if ($validateAuth) {
             $request->session()->regenerate();
 
-            $roleInfo = getUserRoleInfo($request->email);
-            $menu = getMenu($roleInfo->role_id);
-            $roleAccess = getRoleAccess($roleInfo->role_id);
+            $userRoleInfo = getUserRoleInfo($request->email);
+            $menu = getMenu($userRoleInfo->role_id);
+            $roleAccess = getRoleAccess($userRoleInfo->role_id);
 
             $request->session()->put('menu_session', $menu);
             $request->session()->put('roleaccess_session', $roleAccess);
-            $request->session()->put('role_info', $roleInfo);
+            $request->session()->put('role_info', $userRoleInfo);
 
             return redirect()->intended('dashboard');
         };

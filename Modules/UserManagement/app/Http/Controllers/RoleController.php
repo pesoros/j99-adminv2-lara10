@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
+use App\Models\Menu;
 
 class RoleController extends Controller
 {
@@ -49,13 +50,14 @@ class RoleController extends Controller
     public function permissionForm($role_uuid)
     {
         $data['title'] = 'Role Permission';
-        $permissionList = Role::getMenu();
+        $data['role_info'] = Role::getRoleInfo($role_uuid);
+        $permissionList = Menu::getMenu();
         foreach ($permissionList as $key => $value) {
             $access = Role::getAccess();
             $value->access = $access;
             foreach ($value->access as $keyAccess => $valueAccess) {
                 $permission = Role::getPermission($value->slug, $valueAccess->name);
-                $rolePermission = property_exists($permission, 'permid') ? Role::getRolePermission($permission->permid, $role_uuid) : false;
+                $rolePermission = property_exists($permission, 'permid') ? Role::getRolePermission($permission->permid, $data['role_info']->id) : false;
                 $valueAccess->permissionId = property_exists($permission, 'permid') ? $permission->permid : '-';
                 $valueAccess->isAvailable = property_exists($permission, 'permid');
                 $valueAccess->isGranted = $rolePermission;

@@ -34,7 +34,7 @@
  
 <div class="card card-primary">
   <div class="card-header">
-    <h3 class="card-title">Form {{ $title }}</h3>
+    <h3 class="card-title">Form {{ $title }} {{ $role_info->title }}</h3>
   </div>
   <!-- /.card-header -->
   <!-- form start -->
@@ -59,7 +59,7 @@
                   @foreach ($permissionList as $key => $item)
                     <tr data-widget="expandable-table" aria-expanded="false">
                       <td>{{ $key + 1 }}</td>
-                      <td>{{ $item->title }}</td>
+                      <td>{{ $item->parent_title ? $item->parent_title.' - ' : '' }}{{ $item->title }}</td>
                       @foreach ($item->access as $keyAccess => $itemAccess)
                         <td class="text-center">
                           <div class="icheck-success d-inline">

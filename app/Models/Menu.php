@@ -7,6 +7,18 @@ use Illuminate\Support\Facades\DB;
 
 class Menu extends Model
 {
+    protected $table = 'v2_menu';
+    protected $fillable = [
+        'title',
+        'url',
+        'module',
+        'parent_id',
+        'order',
+        'icon',
+        'slug',
+        'status',
+    ];
+
     public function scopeGetUserRoleInfo($query, $datas)
     {
         $email = isset($datas['email']) ? $datas['email'] : '';
@@ -20,7 +32,7 @@ class Menu extends Model
         return $query;
     }
 
-    public function scopeGetMenu($query, $datas)
+    public function scopeGetMenuWithRole($query, $datas)
     {
         $role_id = isset($datas['role_id']) ? $datas['role_id'] : '';
 
@@ -32,6 +44,31 @@ class Menu extends Model
             ->where('perm.access', 'index')
             ->where('menu.parent_id', NULL)
             ->where('perm.status', 1)
+            ->orderBy('menu.order')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeGetMenuParent($query)
+    {
+        $query = DB::table("v2_menu As menu")
+            ->select('menu.id','menu.title','menu.slug','menu.url','menu.icon')
+            ->where('menu.parent_id', NULL)
+            ->where('menu.status', 1)
+            ->orderBy('menu.order')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeGetMenu($query)
+    {
+        $query = DB::table("v2_menu As menu")
+            ->select('menu.title','menu.slug','menu.url','menu.icon','menu2.title as parent_title')
+            ->leftJoin("v2_menu AS menu2", "menu2.id", "=", "menu.parent_id")
+            ->where('menu.status', 1)
+            ->orderBy('menu2.title')
             ->orderBy('menu.order')
             ->get();
 
