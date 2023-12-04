@@ -1,5 +1,5 @@
 {
-    "name": "nwidart/contentmanagement",
+    "name": "nwidart/cms",
     "description": "",
     "authors": [
         {
@@ -17,15 +17,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\ContentManagement\\": "",
-            "Modules\\ContentManagement\\App\\": "app/",
-            "Modules\\ContentManagement\\Database\\Factories\\": "database/factories/",
-            "Modules\\ContentManagement\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\Cms\\": "",
+            "Modules\\Cms\\App\\": "app/",
+            "Modules\\Cms\\Database\\Factories\\": "database/factories/",
+            "Modules\\Cms\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Modules\\ContentManagement\\Tests\\": "tests/"
+            "Modules\\Cms\\Tests\\": "tests/"
         }
     }
 }

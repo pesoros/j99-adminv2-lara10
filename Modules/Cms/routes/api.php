@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
-    Route::get('contentmanagement', fn (Request $request) => $request->user())->name('contentmanagement');
+    Route::get('cms', fn (Request $request) => $request->user())->name('cms');
 });

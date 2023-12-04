@@ -50,11 +50,35 @@
           <label for="module">Module</label>
           <input type="text" class="form-control" id="module" name="module" placeholder="Masukkan module menu" value="{{ old('module') }}">
         </div>
+        <div class="form-group">
+          <label for="icon">Akses</label><br>
+          @foreach ($access as $key => $item)
+            @if ($item->name === 'index')
+                @php
+                    continue
+                @endphp
+            @endif
+            <div class="icheck-success d-inline">
+              <input 
+                type="checkbox" 
+                id="{{ $item->name }}" 
+                name="access[]" 
+                value="{{ $item->name }}"
+              >
+              <label for="{{ $item->name }}">
+                {{ $item->name }}
+              </label>&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+          @endforeach
+        </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label>Parent</label>
           <select class="form-control select2bs4" name="parent" style="width: 100%;">
+            <option value="-" @selected(old('parent') == '-')>
+              -- Menu ini sebagai parent --
+            </option>
             @foreach ($parents as $parent)
                 <option value="{{ $parent->id }}" @selected(old('parent') == $parent)>
                     {{ $parent->title }}

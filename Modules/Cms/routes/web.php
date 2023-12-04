@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\ContentManagement\app\Http\Controllers\ContentManagementController;
+use Modules\Cms\app\Http\Controllers\CmsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,10 @@ use Modules\ContentManagement\app\Http\Controllers\ContentManagementController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('contentmanagement', ContentManagementController::class)->names('contentmanagement');
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('cms')->group(function () {
+        Route::get('address', [CmsController::class, 'listAddress']);
+        Route::get('address/add', [CmsController::class, 'addAddress']);
+    });
 });

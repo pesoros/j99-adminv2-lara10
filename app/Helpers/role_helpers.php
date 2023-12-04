@@ -8,7 +8,7 @@ function getUserRoleInfo($email, $onlyParent = false)
 
 function getMenu($role_id, $onlyParent = false)
 {
-    $result = App\Models\Menu::getMenuWithRole(['role_id' => $role_id]);
+    $result = $role_id !== 1 ? App\Models\Menu::getMenuWithRole(['role_id' => $role_id]) : App\Models\SuperUser::getMenuSU();
 
     if (!$onlyParent) {
         foreach ($result as $key => $value) {
@@ -24,10 +24,16 @@ function getMenu($role_id, $onlyParent = false)
 
 function getChildMenu($parent_id, $role_id)
 {
-    $result = App\Models\Menu::getChildMenu([
-        'parent_id' => $parent_id,
-        'role_id' => $role_id
-    ]);
+    if ($role_id !== 1 ) {
+        $result = App\Models\Menu::getChildMenu([
+            'parent_id' => $parent_id,
+            'role_id' => $role_id
+        ]);
+    } else {
+        $result = App\Models\SuperUser::getChildMenuSU([
+            'parent_id' => $parent_id,
+        ]);
+    }
 
     return $result;
 }

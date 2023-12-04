@@ -2,5 +2,6 @@
     "Blog": true,
     "ContentManagement": true,
     "UserManagement": true,
-    "Dashboard": true
+    "Dashboard": true,
+    "Cms": true
 }

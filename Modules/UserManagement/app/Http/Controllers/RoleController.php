@@ -73,7 +73,7 @@ class RoleController extends Controller
         $data = [];
         $roleId = Role::getRoleId($role_uuid);
         foreach ($request->permission as $key => $value) {
-            $data[$key]['role_uuid'] = $roleId->roleid;
+            $data[$key]['role_id'] = $roleId->roleid;
             $data[$key]['permission_id'] = $value;
         }
 

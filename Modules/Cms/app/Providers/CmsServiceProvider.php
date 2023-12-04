@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\ContentManagement\app\Providers;
+namespace Modules\Cms\app\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-class ContentManagementServiceProvider extends ServiceProvider
+class CmsServiceProvider extends ServiceProvider
 {
-    protected string $moduleName = 'ContentManagement';
+    protected string $moduleName = 'Cms';
 
-    protected string $moduleNameLower = 'contentmanagement';
+    protected string $moduleNameLower = 'cms';
 
     /**
      * Boot the application events.

@@ -87,10 +87,10 @@ class Role extends Model
         return $query;
     }
 
-    public function scopeDeleteRolePermission($query, $role_uuid)
+    public function scopeDeleteRolePermission($query, $role_id)
     {
         $query = DB::table("v2_role_permission")
-            ->where('role_uuid', $role_uuid)
+            ->where('role_id', $role_id)
             ->delete();
 
         return $query;
