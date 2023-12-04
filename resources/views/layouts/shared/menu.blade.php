@@ -1,44 +1,34 @@
 <nav class="mt-2">
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-    <li class="nav-item menu-open">
-      <a href="#" class="nav-link active">
-        <p>Dashboard</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-chart-pie"></i>
-        <p>
-          Charts
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="pages/charts/chartjs.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>ChartJS</p>
+    @foreach (Session('menu_session') as $menu)
+      @if (!isset($menu->child))
+        <li class="nav-item {{ (request()->segment(1) ==  $menu->url) ? 'menu-open' : '' }}">
+          <a href="{{ url($menu->url) }}" class="nav-link {{ (request()->segment(1) == $menu->url) ? 'active' : '' }}">
+            {!! $menu->icon !!}
+            <p>{{ $menu->title }}</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="pages/charts/flot.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Flot</p>
+      @else
+        <li class="nav-item {{ (request()->segment(1) == $menu->url) ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link  {{ (request()->segment(1) == $menu->url) ? 'active' : '' }}">
+            {!! $menu->icon !!}
+            <p>
+              {{ $menu->title }}
+              <i class="right fas fa-angle-left"></i>
+            </p>
           </a>
+          <ul class="nav nav-treeview">
+            @foreach ($menu->child as $child)
+              <li class="nav-item">
+                <a href="{{ url($child->url) }}" class="nav-link {{ (request()->segment(2) == explode("/", $child->url)[1]) ? 'active' : '' }}">
+                  {!! $child->icon !!}
+                  <p>{{ $child->title }}</p>
+                </a>
+              </li>
+            @endforeach
+          </ul>
         </li>
-        <li class="nav-item">
-          <a href="pages/charts/inline.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Inline</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="pages/charts/uplot.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>uPlot</p>
-          </a>
-        </li>
-      </ul>
-    </li>
+      @endif
+    @endforeach
   </ul>
 </nav>

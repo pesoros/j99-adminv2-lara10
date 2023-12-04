@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{$title ? $title.' |' : ''}} J99 Admin</title>
+  <title>{{$title ? $title.' |' : ''}} J99 Trans</title>
   <link rel="icon" type="image/x-icon" href="{{asset('assets/images/logo/tab_icon.png')}}">
 
   <!-- Google Font: Source Sans Pro -->
@@ -19,6 +19,10 @@
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- JQVMap -->
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/jqvmap/jqvmap.min.css')}}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('assets/ui/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/ui/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/ui/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets/ui/dist/css/adminlte.min.css')}}">
   <!-- overlayScrollbars -->
@@ -67,13 +71,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1 class="m-0">{{$title}}</h1>
-            </div><!-- /.col -->
-            {{-- <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-              </ol>
-            </div><!-- /.col --> --}}
+            </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
@@ -104,6 +102,19 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('assets/ui/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{asset('assets/ui/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{asset('assets/ui/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
@@ -125,5 +136,14 @@
 <!-- AdminLTE App -->
 <script src="{{asset('assets/ui/dist/js/adminlte.js')}}"></script>
 <script src="{{asset('assets/ui/dist/js/pages/dashboard.js')}}"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#datatable-def").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#datatable-def_wrapper .col-md-6:eq(0)');
+  });
+</script>
 </body>
 </html>
