@@ -94,22 +94,6 @@ class Menu extends Model
         return $query;
     }
 
-    public function scopeGetRoleAccess($query, $datas)
-    {
-        $role_id = isset($datas['role_id']) ? $datas['role_id'] : '';
-
-        $query = DB::table("v2_role_permission AS roleperm")
-            ->select(DB::raw("CONCAT(perm.slug,' ',perm.access) as slugaccess"))
-            ->join("v2_permission AS perm", "perm.id", "=", "roleperm.permission_id")
-            ->where('roleperm.role_id', $role_id)
-            ->where('perm.access', '!=' ,'index')
-            ->where('perm.status', 1)
-            ->orderBy('perm.slug')
-            ->get();
-
-        return collect($query)->pluck('slugaccess')->toArray();
-    }
-
     public function scopeSavePermission($query, $data)
     {
         $query = DB::table("v2_permission")->insert($data);

@@ -28,8 +28,8 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             $userRoleInfo = getUserRoleInfo($request->email);
+            $roleAccess = getRoleAccessData($userRoleInfo->role_id);
             $menu = getMenu($userRoleInfo->role_id);
-            $roleAccess = getRoleAccess($userRoleInfo->role_id);
 
             $request->session()->put('menu_session', $menu);
             $request->session()->put('roleaccess_session', $roleAccess);

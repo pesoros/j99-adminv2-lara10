@@ -48,4 +48,16 @@ class SuperUser extends Model
 
         return $query;
     }
+
+    public function scopeGetRoleAccess($query)
+    {
+        $query = DB::table("v2_permission AS perm")
+            ->select(DB::raw("CONCAT(perm.slug,' ',perm.access) as slugaccess"))
+            ->where('perm.access', '!=' ,'index')
+            ->where('perm.status', 1)
+            ->orderBy('perm.slug')
+            ->get();
+
+        return collect($query)->pluck('slugaccess')->toArray();
+    }
 }

@@ -6,7 +6,9 @@
     <div class="card-header">
         <h3 class="card-title">List {{ $title }}</h3>
         <div class="float-right">
+          @if (permissionCheck('add'))
             <a href="{{ url('usermanagement/menu/add') }}" class="btn bg-gradient-primary btn-sm">Tambah data</a>
+          @endif
         </div>
     </div>
     <!-- /.card-header -->
@@ -30,8 +32,8 @@
               <td>{{ $value->phone }}</td>
               <td>
                 <div class="btn-group btn-block">
-                  <a href="#" class="btn btn-success btn-sm">Edit</a>
-                  <a href="#" onclick="return confirm('Anda yakin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a>
+                  @if (permissionCheck('edit')) <a href="#" class="btn btn-success btn-sm">Edit</a> @endif
+                  @if (permissionCheck('delete')) <a href="#" onclick="return confirm('Anda yakin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a> @endif
                 </div>
               </td>
             </tr>

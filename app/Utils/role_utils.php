@@ -38,17 +38,27 @@ function getChildMenu($parent_id, $role_id)
     return $result;
 }
 
-function getRoleAccess($role_id)
+function getRoleAccessData($role_id)
 {
-    $result = App\Models\Menu::getRoleAccess([
-        'role_id' => $role_id
-    ]);
+    if ($role_id !== 1 ) {
+        $result = App\Models\Role::getRoleAccess([
+            'role_id' => $role_id
+        ]);
+    } else {
+        $result = App\Models\SuperUser::getRoleAccess();
+    }
 
     return $result;
 }
 
-function checkAccess($accessName)
+function getModuleUrl()
 {
-    $result = in_array($accessName, Session('roleaccess_session'));
-    return $result;
+    return request()->segment(2) ? request()->segment(2) : request()->segment(1);
+}
+
+function permissionCheck($access, $directModule = '')
+{
+    $permissionData = Session('roleaccess_session');
+    $module = $directModule ? $directModule : getModuleUrl();
+    return in_array($module.' '.$access, $permissionData);
 }

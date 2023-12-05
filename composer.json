@@ -29,8 +29,8 @@
             "Modules\\": "Modules/"
         },
         "files": [
-            "app/Helpers/helpers.php",
-            "app/Helpers/role_helpers.php"
+            "app/Utils/helpers.php",
+            "app/Utils/role_utils.php"
         ]
     },
     "autoload-dev": {
