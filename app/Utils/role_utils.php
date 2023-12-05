@@ -51,14 +51,14 @@ function getRoleAccessData($role_id)
     return $result;
 }
 
-function getModuleUrl()
+function getSlugUrl()
 {
     return request()->segment(2) ? request()->segment(2) : request()->segment(1);
 }
 
-function permissionCheck($access, $directModule = '')
+function permissionCheck($access, $directSlug = '')
 {
     $permissionData = Session('roleaccess_session');
-    $module = $directModule ? $directModule : getModuleUrl();
-    return in_array($module.' '.$access, $permissionData);
+    $slug = $directSlug ? $directSlug : getSlugUrl();
+    return in_array($slug.' '.$access, $permissionData);
 }

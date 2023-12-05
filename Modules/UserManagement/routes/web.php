@@ -16,7 +16,7 @@ use Modules\UserManagement\app\Http\Controllers\MenuController;
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','has-permission'])->group(function () {
     Route::prefix('usermanagement')->group(function () {
         Route::get('account', [AccountController::class, 'listAccount']);
         Route::get('account/add', [AccountController::class, 'addAccount']);
