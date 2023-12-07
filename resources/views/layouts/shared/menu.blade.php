@@ -4,14 +4,14 @@
       @if (!isset($menu->child))
         <li class="nav-item {{ (request()->segment(1) ==  $menu->url) ? 'menu-open' : '' }}">
           <a href="{{ url($menu->url) }}" class="nav-link {{ (request()->segment(1) == $menu->url) ? 'active' : '' }}">
-            {!! $menu->icon !!}
+            <i class="far fa-circle nav-icon"></i>
             <p>{{ $menu->title }}</p>
           </a>
         </li>
       @else
         <li class="nav-item {{ (request()->segment(1) == $menu->url) ? 'menu-open' : '' }}">
           <a href="#" class="nav-link  {{ (request()->segment(1) == $menu->url) ? 'active' : '' }}">
-            {!! $menu->icon !!}
+            <i class="far fa-circle nav-icon"></i>
             <p>
               {{ $menu->title }}
               <i class="right fas fa-angle-left"></i>
@@ -26,7 +26,7 @@
             @endphp
               <li class="nav-item">
                 <a href="{{ url($child->url) }}" class="nav-link {{ $segmentCheck ? 'active' : '' }}">
-                  {!! $child->icon !!}
+                  <i class="fas fa-circle nav-icon"></i>
                   <p>{{ $child->title }}</p>
                 </a>
               </li>
