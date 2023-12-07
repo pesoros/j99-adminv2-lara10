@@ -14,6 +14,11 @@ use Modules\Masterdata\app\Http\Controllers\MasterdataController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('masterdata', MasterdataController::class)->names('masterdata');
+Route::middleware(['auth','has-permission'])->group(function () {
+    Route::prefix('masterdata')->group(function () {
+        Route::get('bus', [MasterdataController::class, 'listMasterBus']);
+        Route::get('bus/add', [MasterdataController::class, 'addMasterBus']);
+        Route::post('bus/add', [MasterdataController::class, 'addMasterBusStore']);
+
+    });
 });
