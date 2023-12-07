@@ -19,6 +19,5 @@ Route::middleware(['auth','has-permission'])->group(function () {
         Route::get('bus', [MasterdataController::class, 'listMasterBus']);
         Route::get('bus/add', [MasterdataController::class, 'addMasterBus']);
         Route::post('bus/add', [MasterdataController::class, 'addMasterBusStore']);
-
     });
 });

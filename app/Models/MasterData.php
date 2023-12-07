@@ -16,4 +16,28 @@ class MasterData extends Model
 
         return $query;
     }
+
+    public function scopeGetMasterFacilities($query)
+    {
+        $query = DB::table("v2_facilities")
+            ->select('id','name')
+            ->orderBy('id')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeSaveMasterBus($query, $data)
+    {
+        $query = DB::table("v2_bus")->insertGetId($data);
+
+        return $query;
+    }
+
+    public function scopeSaveBusFacilities($query, $data)
+    {
+        $query = DB::table("v2_bus_facilities")->insert($data);
+
+        return $query;
+    }
 }

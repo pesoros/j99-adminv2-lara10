@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{asset('assets/ui/plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/ui/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- JQVMap -->
@@ -102,6 +105,8 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('assets/ui/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- Select2 -->
+<script src="{{asset('assets/ui/plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{asset('assets/ui/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/ui/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -139,6 +144,12 @@
 <!-- Page specific script -->
 <script>
   $(function () {
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
     $("#datatable-def").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
