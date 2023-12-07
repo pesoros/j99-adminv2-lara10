@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Masterdata\app\Http\Controllers\MasterdataController;
+use Modules\Masterdata\app\Http\Controllers\MasterdataBusController;
+use Modules\Masterdata\app\Http\Controllers\MasterdataFacilitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,11 @@ use Modules\Masterdata\app\Http\Controllers\MasterdataController;
 
 Route::middleware(['auth','has-permission'])->group(function () {
     Route::prefix('masterdata')->group(function () {
-        Route::get('bus', [MasterdataController::class, 'listMasterBus']);
-        Route::get('bus/add', [MasterdataController::class, 'addMasterBus']);
-        Route::post('bus/add', [MasterdataController::class, 'addMasterBusStore']);
+        Route::get('bus', [MasterdataBusController::class, 'listMasterBus']);
+        Route::get('bus/add', [MasterdataBusController::class, 'addMasterBus']);
+        Route::post('bus/add', [MasterdataBusController::class, 'addMasterBusStore']);
+        Route::get('facilities', [MasterdataFacilitiesController::class, 'listMasterFacilities']);
+        Route::get('facilities/add', [MasterdataFacilitiesController::class, 'addMasterFacilities']);
+        Route::post('facilities/add', [MasterdataFacilitiesController::class, 'addMasterFacilitiesStore']);
     });
 });

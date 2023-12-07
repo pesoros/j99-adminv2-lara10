@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\MasterData;
 
-class MasterdataController extends Controller
+class MasterdataBusController extends Controller
 {
     public function listMasterBus()
     {

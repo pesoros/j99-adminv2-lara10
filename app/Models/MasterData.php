@@ -40,4 +40,11 @@ class MasterData extends Model
 
         return $query;
     }
+
+    public function scopesaveFacility($query, $data)
+    {
+        $query = DB::table("v2_facilities")->insert($data);
+
+        return $query;
+    }
 }
