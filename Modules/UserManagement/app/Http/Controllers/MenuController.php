@@ -31,6 +31,7 @@ class MenuController extends Controller
     {
         $credentials = $request->validate([
             'menuname' => ['required', 'string'],
+            'slug' => ['required', 'string'],
             'urllink' => ['required', 'string'],
             'module' => ['required', 'string'],
             'parent' => ['required', 'string'],
@@ -39,7 +40,7 @@ class MenuController extends Controller
         ]);
 
         $permData = [];
-        $slug = sluggify($request->menuname);
+        $slug = sluggify($request->slug);
         $parent = $request->parent !== '-' ? $request->parent : NULL;
 
         $create = Menu::create([

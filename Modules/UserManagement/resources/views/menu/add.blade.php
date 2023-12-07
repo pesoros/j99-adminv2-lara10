@@ -51,6 +51,10 @@
           <input type="text" class="form-control" id="module" name="module" placeholder="Masukkan module menu" value="{{ old('module') }}">
         </div>
         <div class="form-group">
+          <label for="slug">Slug</label>
+          <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug menu" value="{{ old('slug') }}">
+        </div>
+        <div class="form-group">
           <label for="icon">Akses</label><br>
           @foreach ($access as $key => $item)
             @if ($item->name === 'index')
