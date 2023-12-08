@@ -6,9 +6,9 @@ function getUserRoleInfo($email, $onlyParent = false)
     return $result;
 }
 
-function getMenu($role_uuid, $onlyParent = false)
+function getMenu($role_id, $onlyParent = false)
 {
-    $result = $role_uuid !== env('SUUUID') ? App\Models\Menu::getMenuWithRole(['role_id' => $role_id]) : App\Models\SuperUser::getMenuSU();
+    $result = $role_id !== 1 ? App\Models\Menu::getMenuWithRole(['role_id' => $role_id]) : App\Models\SuperUser::getMenuSU();
 
     if (!$onlyParent) {
         foreach ($result as $key => $value) {
