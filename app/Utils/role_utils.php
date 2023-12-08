@@ -24,7 +24,7 @@ function getMenu($role_id, $onlyParent = false)
 
 function getChildMenu($parent_id, $role_id)
 {
-    if ($role_id !== 1 ) {
+    if ($role_id !== '1' ) {
         $result = App\Models\Menu::getChildMenu([
             'parent_id' => $parent_id,
             'role_id' => $role_id
@@ -40,7 +40,7 @@ function getChildMenu($parent_id, $role_id)
 
 function getRoleAccessData($role_id)
 {
-    if ($role_id !== 1 ) {
+    if ($role_id !== '1') {
         $result = App\Models\Role::getRoleAccess([
             'role_id' => $role_id
         ]);

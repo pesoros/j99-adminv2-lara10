@@ -57,12 +57,12 @@ class MenuController extends Controller
         if ($parent === NULL) {
             $permData[0]['slug'] = $slug;
             $permData[0]['access'] = 'index';
-            $permData[0]['status'] = 1;
+            $permData[0]['status'] = '1';
         } else {
             foreach ($request->access as $key => $value) {
                 $permData[$key]['slug'] = $slug;
                 $permData[$key]['access'] = $value;
-                $permData[$key]['status'] = 1;
+                $permData[$key]['status'] = '1';
             }
         }
 
