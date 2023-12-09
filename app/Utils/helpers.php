@@ -25,3 +25,11 @@ function generateUuid()
 {
    return Illuminate\Support\Str::uuid();
 }
+
+function numberSpacer($str, $separator = ' ') {
+  return wordwrap($str, 4, $separator, true);
+}
+
+function formatAmount($str, $separator = '.') {
+  return 'Rp '.number_format($str,0,".",".");
+}

@@ -4,5 +4,6 @@
     "UserManagement": true,
     "Dashboard": true,
     "Cms": true,
-    "Masterdata": true
+    "Masterdata": true,
+    "Sale": true
 }
