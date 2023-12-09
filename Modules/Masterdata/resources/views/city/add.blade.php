@@ -39,28 +39,24 @@
     <div class="card-body row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label for="class_name">Nama Kelas</label>
-          <input type="text" class="form-control" id="class_name" name="class_name" placeholder="Masukkan nama kelas" value="{{ old('class_name') }}">
+          <label for="city_name">Nama Kota</label>
+          <input type="text" class="form-control" id="city_name" name="city_name" placeholder="Masukkan nama kelas" value="{{ old('city_name') }}">
         </div>
         <div class="form-group">
-          <label for="seat_count">Jumlah kursi</label>
-          <input type="number" class="form-control" id="seat_count" name="seat_count" placeholder="Masukkan nama kelas" value="{{ old('seat_count') }}">
-        </div>
-        <div class="form-group">
-          <label>Fasilitas</label>
-          <select class="select2 select2-hidden-accessible" multiple="" name="facilities[]" data-placeholder="Pilih fasilitas" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
-            @foreach ($facilities as $facility)
-                <option data-select2-id="{{ $facility->id }}" value="{{ $facility->id }}">
-                    {{ $facility->name }}
+          <label>Provinsi</label>
+          <select class="form-control select2bs4" name="province" style="width: 100%;">
+            @foreach ($province as $provinceItem)
+                <option value="{{ $provinceItem->uuid }}" @selected(old('province') == $provinceItem)>
+                    {{ $provinceItem->name }}
                 </option>
             @endForeach
           </select>
-        </div> 
+        </div>
       </div>
     </div>
     <div class="card-footer">
       <button type="submit" class="btn btn-primary">Submit</button>
-      <a href="{{ url('masterdata/class') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>
+      <a href="{{ url('masterdata/city') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>
     </div>
   </form>
 </div>

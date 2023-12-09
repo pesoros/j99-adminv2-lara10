@@ -59,9 +59,38 @@ class MasterData extends Model
         return $query;
     }
 
-    public function scopesaveFacility($query, $data)
+    public function scopeSaveMasterFacility($query, $data)
     {
         $query = DB::table("v2_facilities")->insert($data);
+
+        return $query;
+    }
+
+    public function scopeGetMasterCityList($query)
+    {
+        $query = DB::table("v2_area_city AS city")
+            ->select('city.uuid','city.name','province.name AS province_name')
+            ->join("v2_area_province AS province", "province.uuid", "=", "city.province_uuid")
+            ->orderBy('province.name')
+            ->orderBy('city.name')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeGetMasterProvinceList($query)
+    {
+        $query = DB::table("v2_area_province")
+            ->select('uuid','name')
+            ->orderBy('name')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeSaveMasterCity($query, $data)
+    {
+        $query = DB::table("v2_area_city")->insert($data);
 
         return $query;
     }

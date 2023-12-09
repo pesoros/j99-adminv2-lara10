@@ -36,7 +36,7 @@ class MasterdataFacilitiesController extends Controller
             'name' => $request->facility_name,
         ];
 
-        $save = MasterData::saveFacility($data);
+        $save = MasterData::saveMasterFacility($data);
 
         if ($save) {
             return back()->with('success', 'Master fasilitas tersimpan!');

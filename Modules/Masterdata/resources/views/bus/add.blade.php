@@ -55,7 +55,7 @@
           <input type="text" class="form-control" id="model" name="model" placeholder="Masukkan nama model" value="{{ old('model') }}">
         </div>
         <div class="form-group">
-          <label>class</label>
+          <label>Kelas</label>
           <select class="form-control select2bs4" name="class_uuid" style="width: 100%;">
             @foreach ($class as $classItem)
                 <option value="{{ $classItem->uuid }}" @selected(old('class_uuid') == $classItem)>
