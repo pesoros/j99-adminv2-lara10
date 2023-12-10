@@ -39,7 +39,7 @@ class MasterdataCityController extends Controller
             'province_uuid' => $request->province,
         ];
         
-        $saveCity = MasterData::SaveMasterCity($saveData);
+        $saveCity = MasterData::saveMasterCity($saveData);
 
         if ($saveCity) {
             return back()->with('success', 'Master kota tersimpan!');

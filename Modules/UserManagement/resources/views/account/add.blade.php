@@ -53,7 +53,7 @@
         <label>Role</label>
         <select class="form-control select2bs4" name="role" style="width: 100%;">
           @foreach ($roles as $role)
-              <option value="{{ $role->uuid }}" @selected(old('role_uuid') == $role)>
+              <option value="{{ $role->uuid }}" @selected(old('role_uuid') == $role->uuid)>
                   {{ $role->title }}
               </option>
           @endForeach

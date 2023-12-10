@@ -19,5 +19,8 @@ Route::middleware(['auth','has-permission'])->group(function () {
         Route::get('customer', [SaleCustomerController::class, 'listCustomer']);
         Route::get('customer/add', [SaleCustomerController::class, 'addCustomer']);
         Route::post('customer/add', [SaleCustomerController::class, 'addCustomerStore']);
+        Route::get('customer/edit/{uuid}', [SaleCustomerController::class, 'editCustomer']);
+        Route::post('customer/edit/{uuid}', [SaleCustomerController::class, 'editCustomerUpdate']);
+        Route::get('customer/delete/{uuid}', [SaleCustomerController::class, 'deleteCustomer']);
     });
 });

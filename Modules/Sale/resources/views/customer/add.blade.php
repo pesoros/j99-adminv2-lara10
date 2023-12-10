@@ -54,15 +54,15 @@
           <label>Kota</label>
           <select class="form-control select2bs4" name="city" style="width: 100%;">
             @foreach ($city as $cityItem)
-                <option value="{{ $cityItem->uuid }}" @selected(old('city') == $cityItem)>
+                <option value="{{ $cityItem->uuid }}" @selected(old('city') == $cityItem->uuid)>
                     {{ $cityItem->name }}
                 </option>
             @endForeach
           </select>
         </div>
         <div class="form-group">
-          <label for="address">Alamat</label>
-          <input type="text" class="form-control" id="address" name="address" placeholder="Masukkan nama kelas" value="{{ old('address') }}">
+          <label>Alamat</label>
+          <textarea class="form-control" name="address" rows="3" placeholder="Masukkan alamat">{{ old('address') }}</textarea>
         </div>
       </div>
     </div>

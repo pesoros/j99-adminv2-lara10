@@ -84,7 +84,7 @@
               -- Menu ini sebagai parent --
             </option>
             @foreach ($parents as $parent)
-                <option value="{{ $parent->id }}" @selected(old('parent') == $parent)>
+                <option value="{{ $parent->id }}" @selected(old('parent') == $parent->id)>
                     {{ $parent->title }}
                 </option>
             @endForeach

@@ -46,7 +46,7 @@
           <label>Provinsi</label>
           <select class="form-control select2bs4" name="province" style="width: 100%;">
             @foreach ($province as $provinceItem)
-                <option value="{{ $provinceItem->uuid }}" @selected(old('province') == $provinceItem)>
+                <option value="{{ $provinceItem->uuid }}" @selected(old('province') == $provinceItem->uuid)>
                     {{ $provinceItem->name }}
                 </option>
             @endForeach
