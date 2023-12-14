@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Sale\app\Http\Controllers\SaleCustomerController;
+use Modules\Sale\app\Http\Controllers\SaleBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,13 @@ Route::middleware(['auth','has-permission'])->group(function () {
         Route::get('customer/edit/{uuid}', [SaleCustomerController::class, 'editCustomer']);
         Route::post('customer/edit/{uuid}', [SaleCustomerController::class, 'editCustomerUpdate']);
         Route::get('customer/delete/{uuid}', [SaleCustomerController::class, 'deleteCustomer']);
+
+        Route::get('book', [SaleBookController::class, 'listBook']);
+        Route::get('book/add', [SaleBookController::class, 'addBook']);
+        Route::post('book/add', [SaleBookController::class, 'addBookStore']);
+        Route::get('book/edit/{uuid}', [SaleBookController::class, 'editBook']);
+        Route::post('book/edit/{uuid}', [SaleBookController::class, 'editBookUpdate']);
+        Route::get('book/delete/{uuid}', [SaleBookController::class, 'deleteBook']);
+
     });
 });

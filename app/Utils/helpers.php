@@ -1,7 +1,7 @@
 <?php
   
-function dateFormat($date,$format){
-    return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format($format);    
+function dateTimeFormat($date){
+    return \Carbon\Carbon::parse($date)->format('d/m/Y g:i A');    
 }
 
 function trimString($string, $repl, $limit) 
@@ -32,4 +32,15 @@ function numberSpacer($str, $separator = ' ') {
 
 function formatAmount($str, $separator = '.') {
   return 'Rp '.number_format($str,0,".",".");
+}
+
+function generateCode($prefix, $suffix = '-') {
+  $characters = '0123456789';
+  $suffix = $suffix === '-' ? substr(str_shuffle($characters), 0, 3) : $suffix;
+  $date = \Carbon\Carbon::now()->format('ymdHi');
+  return $prefix.$date.$suffix;
+}
+
+function dateTimeRangeFormatToSave($date){
+  return \Carbon\Carbon::createFromFormat('d/m/Y g:i A', trim($date))->toDateTimeString();
 }

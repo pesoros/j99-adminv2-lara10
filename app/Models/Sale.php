@@ -63,4 +63,41 @@ class Sale extends Model
 
         return $query;
     }
+
+    public function scopeGetBookList($query)
+    {
+        $query = DB::table("v2_book AS book")
+            ->select(
+                'book.uuid',
+                'book.booking_code',
+                'book.start_date',
+                'book.finish_date',
+                'customer.name as customer_name',
+                'city_from.name as city_from',
+                'city_to.name as city_to'
+            )
+            ->leftJoin("v2_customer AS customer", "customer.uuid", "=", "book.customer_uuid")
+            ->leftJoin("v2_area_city AS city_from", "city_from.uuid", "=", "book.departure_city_uuid")
+            ->leftJoin("v2_area_city AS city_to", "city_to.uuid", "=", "book.destination_city_uuid")
+            ->orderBy('book.created_at')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeSaveBook($query, $data)
+    {
+        $query = DB::table("v2_book")->insert($data);
+
+        return $query;
+    }
+
+    public function scopeRemoveBook($query, $uuid)
+    {
+        $query = DB::table("v2_book")
+            ->where('uuid',$uuid)
+            ->delete();
+
+        return $query;
+    }
 }

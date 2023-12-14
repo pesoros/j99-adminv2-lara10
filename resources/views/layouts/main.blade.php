@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/summernote/summernote-bs4.min.css')}}">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.css')}}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -136,6 +138,8 @@
 <script src="{{asset('assets/ui/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
 <script src="{{asset('assets/ui/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- date-range-picker -->
+<script src="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('assets/ui/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
@@ -154,6 +158,34 @@
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#datatable-def_wrapper .col-md-6:eq(0)');
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+
+    //Date picker
+    $('#datepicker').datetimepicker({
+        format: 'L'
+    });
+
+    //Date and time picker
+    $('#datetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+    //Date range picker
+    $('#daterangepicker').daterangepicker({
+      locale: {
+        format: 'DD/MM/YYYY'
+      }
+    })
+    //Date range picker with time picker
+    $('#datetimerangepicker').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'DD/MM/YYYY hh:mm A'
+      }
+    })
   });
 </script>
 </body>
