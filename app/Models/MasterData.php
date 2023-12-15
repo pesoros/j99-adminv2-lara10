@@ -10,7 +10,7 @@ class MasterData extends Model
     public function scopeGetMasterBusList($query)
     {
         $query = DB::table("v2_bus AS bus")
-            ->select('bus.uuid','bus.name','bus.registration_number','bus.brand','bus.model','bus.status','class.name AS class')
+            ->select('bus.uuid','bus.name','bus.registration_number','bus.brand','bus.model','bus.status','class.name AS class','class.seat')
             ->join("v2_class AS class", "class.uuid", "=", "bus.class_uuid")
             ->orderBy('bus.created_at')
             ->get();

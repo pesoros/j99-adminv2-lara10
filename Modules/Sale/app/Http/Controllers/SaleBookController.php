@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Sale;
+use App\Models\MasterData;
 
 class SaleBookController extends Controller
 {
@@ -23,6 +24,7 @@ class SaleBookController extends Controller
         $data['title'] = 'Tambah Reservasi';
         $data['customer'] = Sale::getCustomerList();
         $data['city'] = Sale::getMasterCityList();
+        $data['bus'] = MasterData::getMasterBusList();
 
         return view('sale::book.add', $data);
     }

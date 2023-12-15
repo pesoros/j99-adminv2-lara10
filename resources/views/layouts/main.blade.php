@@ -20,8 +20,6 @@
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="{{asset('assets/ui/plugins/jqvmap/jqvmap.min.css')}}">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -126,9 +124,6 @@
 <script src="{{asset('assets/ui/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
 <script src="{{asset('assets/ui/plugins/sparklines/sparkline.js')}}"></script>
-<!-- JQVMap -->
-<script src="{{asset('assets/ui/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
 <!-- jQuery Knob Chart -->
 <script src="{{asset('assets/ui/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->
@@ -144,10 +139,17 @@
 <script src="{{asset('assets/ui/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('assets/ui/dist/js/adminlte.js')}}"></script>
-<script src="{{asset('assets/ui/dist/js/pages/dashboard.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js" 
+  integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
 <!-- Page specific script -->
-<script>
+@stack('extra-scripts')
+<script type="text/javascript">
   $(function () {
+    // money format input.
+    $( '.moneyform' ).mask('000.000.000', {reverse: true});
+
     $('.select2').select2()
 
     //Initialize Select2 Elements

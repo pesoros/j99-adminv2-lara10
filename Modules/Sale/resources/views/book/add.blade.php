@@ -91,6 +91,29 @@
           <textarea class="form-control" name="notes" rows="3" placeholder="Masukkan catatan jika ada">{{ old('notes') }}</textarea>
         </div>
       </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="bus">Bus</label>
+          <div class="row">
+            <div class="col-sm-6">
+              <select class="form-control select2bs4" name="bus[]" style="width: 100%;">
+                @foreach ($bus as $busItem)
+                    <option value="{{ $busItem->uuid }}" @selected(old('bus[]') == $busItem->uuid)>
+                        {{ $busItem->name }} | {{ $busItem->class }} | {{ $busItem->seat }} Kursi
+                    </option>
+                @endForeach
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Rp</span>
+                </div>
+                <input type="text" class="form-control moneyform" placeholder="Masukkan biaya bus">
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card-footer">
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -100,3 +123,11 @@
 </div>
  
 @endsection
+
+@push('extra-scripts')
+<script type="text/javascript">
+    $(function () {
+      console.log('tescr')
+    });
+</script>
+@endpush
