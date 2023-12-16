@@ -67,8 +67,8 @@ class SaleBookController extends Controller
         foreach ($request->bus as $key => $value) {
             $saveBusData[] = [
                 'book_uuid' =>  $uuid,
-                'bus_uuid' =>  $value,
-                'price' =>  numberClearence($request->busPrice[$key]),
+                'bus_uuid'  =>  $value,
+                'price'     =>  numberClearence($request->busPrice[$key]),
             ];
         }
         
