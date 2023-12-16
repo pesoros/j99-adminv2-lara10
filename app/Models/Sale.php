@@ -92,6 +92,13 @@ class Sale extends Model
         return $query;
     }
 
+    public function scopeSaveBookBus($query, $data)
+    {
+        $query = DB::table("v2_book_bus")->insert($data);
+
+        return $query;
+    }
+
     public function scopeRemoveBook($query, $uuid)
     {
         $query = DB::table("v2_book")

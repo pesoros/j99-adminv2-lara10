@@ -56,9 +56,14 @@
                 <i class="far fa-calendar-alt"></i>
               </span>
             </div>
-            <input type="text" class="form-control float-right" id="datetimerangepicker" name="bookdate" value="{{ old('date') }}">
+            <input type="text" class="form-control float-right datepick" id="datetimerangepicker" name="bookdate" value="{{ old('date') }}">
+            <div class="input-group-append">
+              <span class="input-group-text" id="dayscount">
+                2 hari
+              </span>
+              <input type="hidden" class="form-control" name="dayscount" value="{{ old('dayscount') }}">
+            </div>
           </div>
-          <!-- /.input group -->
         </div>
         <div class="form-group">
           <label>Alamat Penjemputan</label>
@@ -91,32 +96,82 @@
           <textarea class="form-control" name="notes" rows="3" placeholder="Masukkan catatan jika ada">{{ old('notes') }}</textarea>
         </div>
       </div>
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <div class="form-group">
           <label for="bus">Bus</label>
-          <div class="row">
-            <div class="col-sm-6">
-              <select class="form-control select2bs4" name="bus[]" style="width: 100%;">
-                @foreach ($bus as $busItem)
-                    <option value="{{ $busItem->uuid }}" @selected(old('bus[]') == $busItem->uuid)>
-                        {{ $busItem->name }} | {{ $busItem->class }} | {{ $busItem->seat }} Kursi
-                    </option>
-                @endForeach
-              </select>
-            </div>
-            <div class="col-sm-4">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Rp</span>
-                </div>
-                <input type="text" class="form-control moneyform" placeholder="Masukkan biaya bus">
+          <div id="busForm">
+            <div class="row">
+              <div class="col-sm-6">
+                <select class="form-control select2bs4" name="bus[]" style="width: 100%;">
+                  @foreach ($bus as $busItem)
+                      <option value="{{ $busItem->uuid }}" @selected(old('bus[]') == $busItem->uuid)>
+                          {{ $busItem->name }} | {{ $busItem->class }} | {{ $busItem->seat }} Kursi
+                      </option>
+                  @endForeach
+                </select>
               </div>
+              <div class="col-sm-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Rp</span>
+                  </div>
+                  <input type="text" class="form-control moneyform busprice businput_1" name="busPrice[]" placeholder="Masukkan harga bus" required>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <a type="button" id="addRow" class="btn btn-success">Tambah</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="price">Biaya</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp</span>
+            </div>
+            <input type="text" class="form-control moneyform" name="price" placeholder="0" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="discount">Diskon</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp</span>
+            </div>
+            <input type="text" class="form-control moneyform" name="discount" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tax">PPN 11%</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp</span>
+            </div>
+            <input type="text" class="form-control moneyform" name="tax" placeholder="0" readonly>
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <input type="checkbox" name="hasTax" id="taxcheckbox" checked>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="total_price">Total Biaya</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp</span>
+            </div>
+            <input type="text" class="form-control moneyform" name="total_price" placeholder="0" readonly>
           </div>
         </div>
       </div>
     </div>
+    </div>
     <div class="card-footer">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" onclick="return confirm('Anda yakin data sudah benar?')" class="btn btn-primary">Submit</button>
       <a href="{{ url('sale/book') }}" onclick="return confirm('Anda yakin mau kembali?')" class="btn btn-success">Kembali</a>
     </div>
   </form>
@@ -127,7 +182,91 @@
 @push('extra-scripts')
 <script type="text/javascript">
     $(function () {
-      console.log('tescr')
+      const busData = {!!json_encode($bus)!!};
+      let rowCount = 1;
+      
+      $('#addRow').click(function(){
+        let html = '';
+        rowCount++;
+        html += '<div class="row" id="busrow_'+ rowCount +'"><div class="col-sm-6"><select class="form-control select2bs4" name="bus[]" style="width: 100%;">';
+        for (let index = 0; index < busData.length; index++) {
+          html += '<option value="' + busData[index].uuid + '">' + busData[index].name + ' | ' + busData[index].class + ' | ' + busData[index].seat + ' Kursi</option>';
+        }
+        html += '</select></div><div class="col-sm-4"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Rp</span>';
+        html += '</div><input type="text" class="form-control moneyform busprice businput_'+ rowCount +'" name="busPrice[]" placeholder="Masukkan harga bus" required></div></div><div class="col-sm-1">';
+        html += '<a type="button" id="'+ rowCount +'" class="btn btn-danger removeRow">Hapus</a>';
+        $('#busForm').append(html);
+        $('.businput_' + rowCount).mask('000.000.000', {reverse: true});
+        $('.businput_' + rowCount).change(function(){
+          triggerPrice()
+        });
+        $('.select2bs4:last').select2({
+          theme: 'bootstrap4'
+        });
+      });
+
+      $('.businput_1').change(function(){
+        triggerPrice()
+      });
+
+      $('input[name="discount"]').change(function(){
+        triggerPrice()
+      });
+
+      $('#taxcheckbox').change(function(){
+        triggerPrice()
+      });
+
+      $('.datepick').change(function(){
+        const dateCombine = $(this).val().split("-");
+        
+        let dateA = dateCombine[0].trim();
+        dateA = dateA.split("/");
+        dateA = new Date(dateA[2].slice(0, 4), dateA[1] - 1, dateA[0]);
+
+        let dateB = dateCombine[1].trim();
+        dateB = dateB.split("/");
+        dateB = new Date(dateB[2].slice(0, 4), dateB[1] - 1, dateB[0]);
+
+        var milli_secs = dateA.getTime() - dateB.getTime();
+        var days = milli_secs / (1000 * 3600 * 24);
+
+        const diff = Math.round(Math.abs(days)) + 1;
+        $("#dayscount").html(diff + " hari");
+        $('input[name="dayscount"]').val(diff);
+      });
+
+      $(document).on('click', '.removeRow', function(){
+        var button_id = $(this).attr("id"); 
+        $('#busrow_'+button_id+'').remove();
+      });
+
+      function triggerPrice(){
+        let sum = 0;
+        $('.busprice').each(function(){
+            const value = $(this).val().length !== 0 ? $(this).val().replace(/\D/g,'') : 0;
+            sum += parseFloat(value);
+        });
+        const discount = $('input[name="discount"]').val().length !== 0 ? $('input[name="discount"]').val().replace(/\D/g,'') : 0;
+        const price = sum - parseFloat(discount);
+        const tax = $('#taxcheckbox').is(":checked") === true ? (price * (11 / 100)) : 0;
+        const total = price + tax;
+
+        $('input[name="price"]').val(sum);
+        $('input[name="price"]').mask('000.000.000', {reverse: true});
+        $('input[name="tax"]').val(tax);
+        $('input[name="tax"]').mask('000.000.000', {reverse: true});
+        $('input[name="total_price"]').val(total);
+        $('input[name="total_price"]').mask('000.000.000', {reverse: true});
+      }
+
+      // prevent enter
+      $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+      });
     });
 </script>
 @endpush

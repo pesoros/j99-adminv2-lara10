@@ -34,6 +34,14 @@ function formatAmount($str, $separator = '.') {
   return 'Rp '.number_format($str,0,".",".");
 }
 
+function removeExceptNumber($str) {
+  return preg_replace("/[^0-9]/","",$str);
+}
+
+function numberClearence($str) {
+  return intval(removeExceptNumber($str));
+}
+
 function generateCode($prefix, $suffix = '-') {
   $characters = '0123456789';
   $suffix = $suffix === '-' ? substr(str_shuffle($characters), 0, 3) : $suffix;

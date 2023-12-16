@@ -148,7 +148,7 @@
 <script type="text/javascript">
   $(function () {
     // money format input.
-    $( '.moneyform' ).mask('000.000.000', {reverse: true});
+    $('.moneyform').mask('000.000.000', {reverse: true});
 
     $('.select2').select2()
 

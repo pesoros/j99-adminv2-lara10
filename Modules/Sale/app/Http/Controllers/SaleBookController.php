@@ -43,23 +43,39 @@ class SaleBookController extends Controller
         $dateFrom = dateTimeRangeFormatToSave($dateRange[0]);
         $dateTo = dateTimeRangeFormatToSave($dateRange[1]);
         $bookingCode = generateCode('JBK');
+        $uuid = generateUuid();
         
         $saveData = [
-            'uuid' => generateUuid(),
-            'booking_code' => $bookingCode,
-            'customer_uuid' => $request->customer,
-            'start_date' => $dateFrom,
-            'finish_date' => $dateTo,
-            'pickup_address' => $request->address,
-            'departure_city_uuid' => $request->city_from,
+            'uuid'                  => $uuid,
+            'booking_code'          => $bookingCode,
+            'customer_uuid'         => $request->customer,
+            'start_date'            => $dateFrom,
+            'finish_date'           => $dateTo,
+            'days_count'            => $request->dayscount,
+            'pickup_address'        => $request->address,
+            'departure_city_uuid'   => $request->city_from,
             'destination_city_uuid' => $request->city_to,
-            'notes' => $request->notes,
-            'booked_by' => auth()->user()->uuid,
+            'notes'                 => $request->notes,
+            'price'                 => numberClearence($request->price),
+            'discount'              => $request->discount ? numberClearence($request->discount) : 0,
+            'tax'                   => numberClearence($request->tax),
+            'total_price'           => numberClearence($request->total_price),
+            'booked_by'             => auth()->user()->uuid,
         ];
-        
-        $saveCustomer = Sale::saveBook($saveData);
 
-        if ($saveCustomer) {
+        $saveBusData = [];
+        foreach ($request->bus as $key => $value) {
+            $saveBusData[] = [
+                'book_uuid' =>  $uuid,
+                'bus_uuid' =>  $value,
+                'price' =>  numberClearence($request->busPrice[$key]),
+            ];
+        }
+        
+        $saveBook = Sale::saveBook($saveData);
+        $saveBookBus = Sale::saveBookBus($saveBusData);
+
+        if ($saveBook) {
             return back()->with('success', 'Customer tersimpan!');
         }
 
