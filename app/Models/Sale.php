@@ -134,6 +134,7 @@ class Sale extends Model
             ->leftJoin("v2_customer AS customer", "customer.uuid", "=", "book.customer_uuid")
             ->leftJoin("v2_area_city AS city_from", "city_from.uuid", "=", "book.departure_city_uuid")
             ->leftJoin("v2_area_city AS city_to", "city_to.uuid", "=", "book.destination_city_uuid")
+            ->where('book.uuid',$uuid)
             ->orderBy('book.created_at')
             ->first();
 

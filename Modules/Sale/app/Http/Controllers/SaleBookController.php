@@ -125,7 +125,7 @@ class SaleBookController extends Controller
         return back()->with('success', 'Customer terhapus!');
     }
 
-    public function detailBook($uuid)
+    public function detailBook(Request $request, $uuid)
     {
         $data['title'] = 'Detail Reservasi';
         $data['detailBook'] = Sale::getBook($uuid);
