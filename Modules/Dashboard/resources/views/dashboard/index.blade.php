@@ -2,6 +2,9 @@
  
 @section('content')
 
+@if (permissionCheck('add','book'))
+    <a href="{{ url('sale/book/add') }}" class="btn bg-gradient-primary btn-sm">Tambah data</a>
+@endif
 <!-- Timeline Block -->
 <div id="myTimeline">
     <ul class="timeline-events">
