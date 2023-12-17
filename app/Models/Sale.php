@@ -107,4 +107,48 @@ class Sale extends Model
 
         return $query;
     }
+
+    public function scopeGetBook($query, $uuid)
+    {
+        $query = DB::table("v2_book AS book")
+            ->select(
+                'book.created_at',
+                'book.uuid',
+                'book.booking_code',
+                'book.start_date',
+                'book.finish_date',
+                'book.pickup_address',
+                'book.notes',
+                'book.price',
+                'book.discount',
+                'book.tax',
+                'book.total_price',
+                'book.notes',
+                'customer.name AS customer_name',
+                'customer.email AS customer_email',
+                'customer.phone AS customer_phone',
+                'customer.address AS customer_address',
+                'city_from.name as city_from',
+                'city_to.name as city_to'
+            )
+            ->leftJoin("v2_customer AS customer", "customer.uuid", "=", "book.customer_uuid")
+            ->leftJoin("v2_area_city AS city_from", "city_from.uuid", "=", "book.departure_city_uuid")
+            ->leftJoin("v2_area_city AS city_to", "city_to.uuid", "=", "book.destination_city_uuid")
+            ->orderBy('book.created_at')
+            ->first();
+
+        return $query;
+    }
+
+    public function scopeGetBookBus($query, $book_uuid)
+    {
+        $query = DB::table("v2_book_bus AS bookbus")
+            ->select('bus.name','bookbus.price','class.name as classname','class.seat')
+            ->join('v2_bus AS bus', 'bus.uuid', '=', 'bookbus.bus_uuid')
+            ->join("v2_class AS class", "class.uuid", "=", "bus.class_uuid")
+            ->where('bookbus.book_uuid',$book_uuid)
+            ->get();
+
+        return $query;
+    }
 }

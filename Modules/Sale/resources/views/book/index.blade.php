@@ -36,6 +36,7 @@
               <td>{{ dateTimeFormat($value->finish_date) }}</td>
               <td>
                 <div class="btn-group btn-block">
+                  @if (permissionCheck('show')) <a href="{{ url('sale/book/show/detail/'.$value->uuid) }}" class="btn btn-warning btn-sm">Detail</a> @endif
                   @if (permissionCheck('edit')) <a href="{{ url('sale/book/edit/'.$value->uuid) }}" class="btn btn-success btn-sm">Edit</a> @endif
                   @if (permissionCheck('delete')) <a href="{{ url('sale/book/delete/'.$value->uuid) }}" onclick="return confirm('Anda yakin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a> @endif
                 </div>

@@ -1,7 +1,11 @@
 <?php
   
 function dateTimeFormat($date){
-    return \Carbon\Carbon::parse($date)->format('d/m/Y g:i A');    
+    return \Carbon\Carbon::parse($date)->format('d M Y - g:i A');
+}
+
+function dateFormat($date){
+  return \Carbon\Carbon::parse($date)->format('d M Y');
 }
 
 function trimString($string, $repl, $limit) 

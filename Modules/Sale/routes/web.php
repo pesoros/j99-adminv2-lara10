@@ -30,6 +30,6 @@ Route::middleware(['auth','has-permission'])->group(function () {
         Route::get('book/edit/{uuid}', [SaleBookController::class, 'editBook']);
         Route::post('book/edit/{uuid}', [SaleBookController::class, 'editBookUpdate']);
         Route::get('book/delete/{uuid}', [SaleBookController::class, 'deleteBook']);
-
+        Route::get('book/show/detail/{uuid}', [SaleBookController::class, 'detailBook']);
     });
 });

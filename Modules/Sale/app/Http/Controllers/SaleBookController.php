@@ -124,4 +124,13 @@ class SaleBookController extends Controller
 
         return back()->with('success', 'Customer terhapus!');
     }
+
+    public function detailBook($uuid)
+    {
+        $data['title'] = 'Detail Reservasi';
+        $data['detailBook'] = Sale::getBook($uuid);
+        $data['bookbus'] = Sale::getBookBus($uuid);
+
+        return view('sale::book.detail', $data);
+    }
 }

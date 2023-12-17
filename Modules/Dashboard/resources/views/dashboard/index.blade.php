@@ -7,7 +7,7 @@
     <ul class="timeline-events">
         @foreach ($busAgenda as $key => $bus)
             @foreach ($bus->agenda as $agenda)
-                <li data-timeline-node="{ start:'{{ $agenda->start_date }}', end:'{{ $agenda->finish_date }}', row:{{ $key + 1 }} }"></li>
+                <li data-timeline-node="{ start:'{{ $agenda->start_date }}', end:'{{ $agenda->finish_date }}', row:{{ $key + 1 }}, content:'{{ $agenda->uuid }}' }">{{ $agenda->customername }}</li>
             @endforeach
         @endforeach
     </ul>
@@ -62,6 +62,13 @@
                     list:    busRow
                 },
             })
+
+            $("#myTimeline").Timeline('openEvent', function(event) {
+                const uuid = event.content;
+                const url = '{!! url('/sale/book/show/detail'); !!}'
+                window.location.href = url + '/' + uuid;
+                return false;
+            });
         });
     </script>
 @endpush
