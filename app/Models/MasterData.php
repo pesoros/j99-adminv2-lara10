@@ -123,4 +123,31 @@ class MasterData extends Model
 
         return $query;
     }
+
+    public function scopeGetMasterCity($query, $uuid)
+    {
+        $query = DB::table("v2_area_city AS city")
+            ->where('city.uuid', $uuid)
+            ->first();
+
+        return $query;
+    }
+
+    public function scopeUpdateMasterCity($query, $uuid, $data)
+    {
+        $query = DB::table("v2_area_city")
+            ->where('uuid',$uuid)
+            ->update($data);
+
+        return $query;
+    }
+
+    public function scopeRemoveMasterCity($query, $uuid)
+    {
+        $query = DB::table("v2_area_city")
+            ->where('uuid',$uuid)
+            ->delete();
+
+        return $query;
+    }
 }

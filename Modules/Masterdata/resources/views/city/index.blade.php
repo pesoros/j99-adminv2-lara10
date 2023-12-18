@@ -30,8 +30,8 @@
               <td>{{ $value->province_name }}</td>
               <td>
                 <div class="btn-group btn-block">
-                  @if (permissionCheck('edit')) <a href="#" class="btn btn-success btn-sm">Edit</a> @endif
-                  @if (permissionCheck('delete')) <a href="#" onclick="return confirm('Anda yakin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a> @endif
+                  @if (permissionCheck('edit')) <a href="{{ url('masterdata/city/edit/'.$value->uuid) }}" class="btn btn-success btn-sm">Edit</a> @endif
+                  @if (permissionCheck('delete')) <a href="{{ url('masterdata/city/delete/'.$value->uuid) }}" onclick="return confirm('Anda yakin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a> @endif
                 </div>
               </td>
             </tr>
