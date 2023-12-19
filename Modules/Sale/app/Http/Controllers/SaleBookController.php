@@ -119,7 +119,7 @@ class SaleBookController extends Controller
             'discount'              => $request->discount ? numberClearence($request->discount) : 0,
             'tax'                   => numberClearence($request->tax),
             'total_price'           => numberClearence($request->total_price),
-            'booked_by'             => auth()->user()->uuid,
+            'updated_by'             => auth()->user()->uuid,
         ];
 
         $updateBusData = [];
