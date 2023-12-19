@@ -99,6 +99,15 @@ class Sale extends Model
         return $query;
     }
 
+    public function scopeUpdateBook($query, $uuid, $data)
+    {
+        $query = DB::table("v2_book")
+            ->where('uuid',$uuid)
+            ->update($data);
+
+        return $query;
+    }
+
     public function scopeRemoveBook($query, $uuid)
     {
         $query = DB::table("v2_book")
@@ -141,10 +150,28 @@ class Sale extends Model
         return $query;
     }
 
+    public function scopeUpdateBookBus($query, $uuid, $data)
+    {
+        $query = DB::table("v2_book_bus")
+            ->where('book_uuid',$uuid)
+            ->update($data);
+
+        return $query;
+    }
+
+    public function scopeRemoveBookBus($query, $uuid)
+    {
+        $query = DB::table("v2_book_bus")
+            ->where('book_uuid',$uuid)
+            ->delete();
+
+        return $query;
+    }
+
     public function scopeGetBookBus($query, $book_uuid)
     {
         $query = DB::table("v2_book_bus AS bookbus")
-            ->select('bus.name','bookbus.price','class.name as classname','class.seat')
+            ->select('bus.name','bookbus.price', 'bookbus.bus_uuid', 'class.name as classname','class.seat')
             ->join('v2_bus AS bus', 'bus.uuid', '=', 'bookbus.bus_uuid')
             ->join("v2_class AS class", "class.uuid", "=", "bus.class_uuid")
             ->where('bookbus.book_uuid',$book_uuid)
@@ -152,4 +179,6 @@ class Sale extends Model
 
         return $query;
     }
+
+
 }

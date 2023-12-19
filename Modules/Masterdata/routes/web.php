@@ -31,6 +31,9 @@ Route::middleware(['auth','has-permission'])->group(function () {
         Route::get('facilities', [MasterdataFacilitiesController::class, 'listMasterFacilities']);
         Route::get('facilities/add', [MasterdataFacilitiesController::class, 'addMasterFacilities']);
         Route::post('facilities/add', [MasterdataFacilitiesController::class, 'addMasterFacilitiesStore']);
+        Route::get('facilities/edit/{uuid}', [MasterdataFacilitiesController::class, 'editMasterFacilities']);
+        Route::post('facilities/edit/{uuid}', [MasterdataFacilitiesController::class, 'editMasterFacilitiesUpdate']);
+        Route::get('facilities/delete/{uuid}', [MasterdataFacilitiesController::class, 'deleteMasterFacilities']);
         Route::get('city', [MasterdataCityController::class, 'listMasterCity']);
         Route::get('city/add', [MasterdataCityController::class, 'addMasterCity']);
         Route::post('city/add', [MasterdataCityController::class, 'addMasterCityStore']);

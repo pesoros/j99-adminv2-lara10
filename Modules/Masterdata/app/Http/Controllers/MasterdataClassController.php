@@ -21,7 +21,7 @@ class MasterdataClassController extends Controller
     public function addMasterClass()
     {
         $data['title'] = 'Tambah Master Bus';
-        $data['facilities'] = MasterData::getMasterFacilities();
+        $data['facilities'] = MasterData::getMasterFacilitiesList();
 
         return view('masterdata::class.add', $data);
     }

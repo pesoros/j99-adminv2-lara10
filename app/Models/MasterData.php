@@ -7,32 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class MasterData extends Model
 {
+
+    // BUS
     public function scopeGetMasterBusList($query)
     {
         $query = DB::table("v2_bus AS bus")
             ->select('bus.uuid','bus.name','bus.registration_number','bus.brand','bus.model','bus.status','class.name AS class','class.seat')
             ->join("v2_class AS class", "class.uuid", "=", "bus.class_uuid")
             ->orderBy('bus.created_at')
-            ->get();
-
-        return $query;
-    }
-
-    public function scopeGetMasterClassList($query)
-    {
-        $query = DB::table("v2_class")
-            ->select('id','uuid','name','seat')
-            ->orderBy('id')
-            ->get();
-
-        return $query;
-    }
-
-    public function scopeGetMasterFacilities($query)
-    {
-        $query = DB::table("v2_facilities")
-            ->select('id','name')
-            ->orderBy('id')
             ->get();
 
         return $query;
@@ -45,56 +27,6 @@ class MasterData extends Model
         return $query;
     }
 
-    public function scopeSaveMasterClass($query, $data)
-    {
-        $query = DB::table("v2_class")->insert($data);
-
-        return $query;
-    }
-
-    public function scopeSaveClassFacilities($query, $data)
-    {
-        $query = DB::table("v2_class_facilities")->insert($data);
-
-        return $query;
-    }
-
-    public function scopeSaveMasterFacility($query, $data)
-    {
-        $query = DB::table("v2_facilities")->insert($data);
-
-        return $query;
-    }
-
-    public function scopeGetMasterCityList($query)
-    {
-        $query = DB::table("v2_area_city AS city")
-            ->select('city.uuid','city.name','province.name AS province_name')
-            ->join("v2_area_province AS province", "province.uuid", "=", "city.province_uuid")
-            ->orderBy('province.name')
-            ->orderBy('city.name')
-            ->get();
-
-        return $query;
-    }
-
-    public function scopeGetMasterProvinceList($query)
-    {
-        $query = DB::table("v2_area_province")
-            ->select('uuid','name')
-            ->orderBy('name')
-            ->get();
-
-        return $query;
-    }
-
-    public function scopeSaveMasterCity($query, $data)
-    {
-        $query = DB::table("v2_area_city")->insert($data);
-
-        return $query;
-    }
-    
     public function scopeGetMasterBus($query, $uuid)
     {
         $query = DB::table("v2_bus AS bus")
@@ -120,6 +52,36 @@ class MasterData extends Model
         $query = DB::table("v2_bus")
             ->where('uuid',$uuid)
             ->delete();
+
+        return $query;
+    }
+
+    //CITY
+    public function scopeGetMasterCityList($query)
+    {
+        $query = DB::table("v2_area_city AS city")
+            ->select('city.uuid','city.name','province.name AS province_name')
+            ->join("v2_area_province AS province", "province.uuid", "=", "city.province_uuid")
+            ->orderBy('province.name')
+            ->orderBy('city.name')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeGetMasterProvinceList($query)
+    {
+        $query = DB::table("v2_area_province")
+            ->select('uuid','name')
+            ->orderBy('name')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeSaveMasterCity($query, $data)
+    {
+        $query = DB::table("v2_area_city")->insert($data);
 
         return $query;
     }
@@ -150,4 +112,84 @@ class MasterData extends Model
 
         return $query;
     }
+
+    //CLASS
+    public function scopeGetMasterClassList($query)
+    {
+        $query = DB::table("v2_class")
+            ->select('id','uuid','name','seat')
+            ->orderBy('id')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeSaveMasterClass($query, $data)
+    {
+        $query = DB::table("v2_class")->insert($data);
+
+        return $query;
+    }
+
+    public function scopeSaveClassFacilities($query, $data)
+    {
+        $query = DB::table("v2_class_facilities")->insert($data);
+
+        return $query;
+    }
+
+    //FACILITES
+    public function scopeGetMasterFacilitiesList($query)
+    {
+        $query = DB::table("v2_facilities")
+            ->select('id','name')
+            ->orderBy('id')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeGetMasterFacilities($query, $uuid)
+    {
+        $query = DB::table("v2_facilities AS facilities")
+            ->where('facilities.id', $uuid)
+            ->first();
+
+        return $query;
+    }
+
+    public function scopeSaveMasterFacilities($query, $data)
+    {
+        $query = DB::table("v2_facilities")->insert($data);
+
+        return $query;
+    }
+
+    public function scopeUpdateMasterFacilities($query, $uuid, $data)
+    {
+        $query = DB::table("v2_facilities")
+            ->where('id',$uuid)
+            ->update($data);
+
+        return $query;
+    }
+
+    public function scopeCheckFacilitiesContains($query, $uuid)
+    {
+        $query = DB::table("v2_class_facilities")
+            ->where('facilities_id',$uuid)
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeRemoveMasterFacilities($query, $uuid)
+    {
+        $query = DB::table("v2_facilities")
+            ->where('id',$uuid)
+            ->delete();
+
+        return $query;
+    }
+
 }
