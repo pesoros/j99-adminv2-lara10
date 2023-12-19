@@ -89,6 +89,7 @@ class SaleBookController extends Controller
         $data['current'] = Sale::getBook($uuid);
         $data['bus'] = MasterData::getMasterBusList();
         $data['bookbus'] = Sale::getBookBus($uuid);
+        $data['datedata'] = dateRangeFormFormat($data['current']->start_date, $data['current']->finish_date);
 
         return view('sale::book.edit', $data);
     }

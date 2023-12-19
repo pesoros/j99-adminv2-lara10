@@ -54,7 +54,7 @@
                 <i class="far fa-calendar-alt"></i>
               </span>
             </div>
-            <input type="text" class="form-control float-right datepick" id="datetimerangepicker" name="bookdate" value="{{ old('date') }}">
+            <input type="text" class="form-control float-right datepick" id="datetimerangepicker" name="bookdate" value="{{ $datedata }}">
             <div class="input-group-append">
               <span class="input-group-text" id="dayscount">
                 2 hari
