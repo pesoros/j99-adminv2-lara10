@@ -150,15 +150,6 @@ class Sale extends Model
         return $query;
     }
 
-    public function scopeUpdateBookBus($query, $uuid, $data)
-    {
-        $query = DB::table("v2_book_bus")
-            ->where('book_uuid',$uuid)
-            ->update($data);
-
-        return $query;
-    }
-
     public function scopeRemoveBookBus($query, $uuid)
     {
         $query = DB::table("v2_book_bus")

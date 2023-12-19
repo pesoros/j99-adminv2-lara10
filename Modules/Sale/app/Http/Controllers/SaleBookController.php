@@ -132,7 +132,8 @@ class SaleBookController extends Controller
         }
         
         $updateBook = Sale::updateBook($uuid, $updateData);
-        $updateBookBus = Sale::updateBookBus($updateBusData);
+        $removeBookBus = Sale::removeBookBus($uuid);
+        $saveBookBus = Sale::saveBookBus($updateBusData);
 
 
         if ($updateBook) {
