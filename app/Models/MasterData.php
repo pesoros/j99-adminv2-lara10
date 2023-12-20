@@ -138,6 +138,60 @@ class MasterData extends Model
         return $query;
     }
 
+    public function scopeGetMasterClass($query, $uuid)
+    {
+        $query = DB::table("v2_class AS class")
+            ->where('class.uuid', $uuid)
+            ->first();
+
+        return $query;
+    }
+
+    public function scopeGetMasterClassFacilities($query, $uuid)
+    {
+        $query = DB::table("v2_class_facilities AS facilities")
+            ->where('facilities.class_id', $uuid)
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeUpdateMasterClass($query, $uuid, $data)
+    {
+        $query = DB::table("v2_class")
+            ->where('uuid',$uuid)
+            ->update($data);
+
+        return $query;
+    }
+
+    public function scopeCheckClassContains($query, $uuid)
+    {
+        $query = DB::table("v2_bus")
+            ->where('class_uuid',$uuid)
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeRemoveMasterClass($query, $uuid)
+    {
+        $query = DB::table("v2_class")
+            ->where('uuid',$uuid)
+            ->delete();
+
+        return $query;
+    }
+
+    public function scopeRemoveClassFacilities($query, $uuid)
+    {
+        $query = DB::table("v2_class_facilities")
+            ->where('class_id',$uuid)
+            ->delete();
+
+        return $query;
+    }
+
     //FACILITES
     public function scopeGetMasterFacilitiesList($query)
     {

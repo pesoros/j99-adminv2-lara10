@@ -140,14 +140,14 @@ class SaleBookController extends Controller
             return back()->with('success', 'Booking berhasil diubah!');
         }
 
-        return back()->with('failed', 'Customer gagal diubah!');   
+        return back()->with('failed', 'Booking gagal diubah!');   
     }
 
     public function deleteBook($uuid)
     {
         $delete = Sale::removeBook($uuid);
 
-        return back()->with('success', 'Customer terhapus!');
+        return back()->with('success', 'Booking terhapus!');
     }
 
     public function detailBook(Request $request, $uuid)
