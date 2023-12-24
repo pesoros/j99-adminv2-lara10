@@ -47,7 +47,7 @@ class Menu extends Model
     public function scopeGetMenu($query)
     {
         $query = DB::table("v2_menu As menu")
-            ->select('menu.title','menu.slug','menu.url','menu.icon','menu2.title as parent_title')
+            ->select('menu.id', 'menu.title','menu.slug','menu.url','menu.icon','menu2.title as parent_title')
             ->leftJoin("v2_menu AS menu2", "menu2.id", "=", "menu.parent_id")
             ->where('menu.status', 1)
             ->orderBy('menu2.title')

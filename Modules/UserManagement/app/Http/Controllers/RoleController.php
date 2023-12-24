@@ -88,4 +88,51 @@ class RoleController extends Controller
 
         return back()->with('failed', 'Akses role gagal diubah!');        
     }
+
+    public function editRole($uuid)
+    {
+        $data['title'] = 'Edit Role';
+        $data['current'] = Role::getRoleUuid($uuid);
+
+        return view('usermanagement::role.edit', $data);
+    }
+
+    public function editRoleUpdate(Request $request, $uuid)
+    {
+        $credentials = $request->validate([
+            'rolename'      => ['required', 'string'],
+            'description'   => ['required', 'string'],
+        ]);
+        
+        $updateData = [
+            'title' => $request->rolename,
+            'slug' => sluggify($request->rolename),
+            'description' => $request->description,
+        ];
+        
+        $updateRole = Role::updateRole($uuid, $updateData);
+
+        if ($updateRole) {
+            return back()->with('success', 'Role berhasil diubah!');
+        }
+
+        return back()->with('failed', 'Role gagal diubah!');   
+    }
+
+    public function deleteRole($uuid)
+    {
+        $checkContains = Role::checkRoleContains($uuid);
+
+        if (count($checkContains) > 0) {
+            return back()->with('failed', 'Masih ada Role yang dipakai oleh User');
+        }
+
+        $delete = Role::removeRole($uuid);
+
+        if ($delete) {
+            return back()->with('success', 'Role berhasil terhapus!');
+        }
+
+        return back()->with('failed', 'Role gagal terhapus!');
+    }
 }

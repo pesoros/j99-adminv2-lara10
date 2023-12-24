@@ -111,4 +111,40 @@ class Role extends Model
 
         return $query;
     }
+
+    public function scopeGetRoleUuid($query, $uuid)
+    {
+        $query = DB::table("v2_role")
+            ->where('uuid', $uuid)
+            ->first();
+
+        return $query;
+    }
+
+    public function scopeUpdateRole($query, $uuid, $data)
+    {
+        $query = DB::table("v2_role")
+            ->where('uuid',$uuid)
+            ->update($data);
+
+        return $query;
+    }
+
+    public function scopeRemoveRole($query, $uuid)
+    {
+        $query = DB::table("v2_role")
+            ->where('uuid',$uuid)
+            ->delete();
+
+        return $query;
+    }
+
+    public function scopeCheckRoleContains($query, $uuid)
+    {
+        $query = DB::table("users")
+            ->where('role_uuid',$uuid)
+            ->get();
+
+        return $query;
+    }
 }

@@ -50,4 +50,77 @@ class AccountController extends Controller
 
         return back()->with('failed', 'Akun gagal tersimpan!');        
     }
+
+    public function editAccount($uuid)
+    {
+        $data['title'] = 'Edit Account';
+        $data['user'] = User::getUser($uuid);
+        $data['roles'] = Role::getRole();
+
+        return view('usermanagement::account.edit', $data);
+    }
+
+    public function editAccountUpdate(Request $request, $uuid)
+    {
+        $credentials = $request->validate([
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string'],
+            // 'password' => ['required', 'min:8'],
+            'role' => ['required', 'string'],
+        ]);
+        
+        $updateData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            // 'password' => $request->password,
+            'role_uuid' => $request->role,
+        ];
+        
+        $updateUser = User::updateUser($uuid, $updateData);
+
+        if ($updateUser) {
+            return back()->with('success', 'Akun berhasil diubah!');
+        }
+
+        return back()->with('failed', 'Akun gagal diubah!');   
+    }
+
+    public function editAccountPassword($uuid)
+    {
+        $data['user'] = User::getUser($uuid);
+        $data['title'] = 'Edit Account Password';
+
+
+        return view('usermanagement::account.password', $data);
+    }
+
+    public function editAccountPasswordUpdate(Request $request, $uuid)
+    {
+        $credentials = $request->validate([
+            'password' => ['required', 'min:8'],
+        ]);
+        
+        $updateData = [
+            'password' => Hash::make($request->password),
+        ];
+        
+        $updateUser = User::updateUser($uuid, $updateData);
+
+        if ($updateUser) {
+            return back()->with('success', 'Akun Password berhasil diubah!');
+        }
+
+        return back()->with('failed', 'Akun Password gagal diubah!');   
+    }
+
+    public function deleteAccount($uuid)
+    {
+        $delete = User::removeUser($uuid);
+
+        if ($delete) {
+            return back()->with('success', 'Akun berhasil terhapus!');
+        }
+
+        return back()->with('failed', 'Akun gagal terhapus!');
+    }
 }

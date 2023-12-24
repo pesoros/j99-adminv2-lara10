@@ -38,4 +38,31 @@ class User extends Authenticatable
 
         return $query;
     }
+
+    public function scopeGetUser($query, $uuid)
+    {
+        $query = DB::table("users")
+            ->where('uuid', $uuid)
+            ->first();
+
+        return $query;
+    }
+
+    public function scopeUpdateUser($query, $uuid, $data)
+    {
+        $query = DB::table("users")
+            ->where('uuid',$uuid)
+            ->update($data);
+
+        return $query;
+    }
+
+    public function scopeRemoveUser($query, $uuid)
+    {
+        $query = DB::table("users")
+            ->where('uuid',$uuid)
+            ->delete();
+
+        return $query;
+    }
 }

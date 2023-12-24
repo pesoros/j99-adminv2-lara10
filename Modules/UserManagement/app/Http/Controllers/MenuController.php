@@ -16,6 +16,9 @@ class MenuController extends Controller
         $data['title'] = 'Menu';
         $data['list'] = Menu::getMenu();
 
+        // echo("<script>console.log('PHP: " . json_encode($data['list']) . "');</script>");
+
+
         return view('usermanagement::menu.index', $data);
     }
 
@@ -24,6 +27,7 @@ class MenuController extends Controller
         $data['title'] = 'Tambah Menu';
         $data['parents'] = Menu::getMenuParent();
         $data['access'] = Role::GetAccess();
+
         return view('usermanagement::menu.add', $data);
     }
     
