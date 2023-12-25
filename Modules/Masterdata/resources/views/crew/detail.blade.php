@@ -102,8 +102,8 @@
             <tr>
               <td width="20" class="text-center">{{ intval($key) + 1 }}</td>
               <td>{{ $value->roadwarrant_uuid }}</td>
-              <td>Time: {{ $value->check_in_time }}<br>Latitude: {{ $value->check_in_long }}<br>Longitude: {{ $value->check_in_lat }}</td>
-              <td>Time: {{ $value->check_out_time }}<br>Latitude: {{ $value->check_out_long }}<br>Longitude: {{ $value->check_out_lat }}</td>
+              <td>Time: {{ $value->check_in_time }}<br><a href="https://maps.google.com/?q={{ $value->check_in_lat }},{{ $value->check_in_long }}" target="_blank">Location [Google Maps]</a></td>
+              <td>Time: {{ $value->check_out_time }}<br><a href="https://maps.google.com/?q={{ $value->check_out_lat }},{{ $value->check_out_long }}" target="_blank">Location [Google Maps]</a></td>
               <td>{{ $value->distance }} Km</td>
             </tr>
           @endforeach
