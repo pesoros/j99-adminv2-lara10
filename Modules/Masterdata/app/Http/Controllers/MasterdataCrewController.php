@@ -25,15 +25,18 @@ class MasterdataCrewController extends Controller
         $data['list'] = MasterData::getMasterCrewAttendance($uuid);
 
         foreach ($data['list'] as $key => $value) {
-            $theta = $value->check_in_long - $value->check_out_long;
-            $dist = sin(deg2rad($value->check_in_lat)) * sin(deg2rad($value->check_out_lat)) + cos(deg2rad($value->check_in_lat)) * cos(deg2rad($value->check_out_lat)) * cos(deg2rad($theta));
-            $dist = acos($dist);
-            $dist = rad2deg($dist);
-            $miles = $dist * 60 * 1.1515;
-            $km = $miles * 1.609344;
-            $data['list'][$key]->distance = round($km, 2);;
+            if ($value->check_out_time == null) {
+                $data['list'][$key]->distance = 0;
+            } else {
+                $theta = $value->check_in_long - $value->check_out_long;
+                $dist = sin(deg2rad($value->check_in_lat)) * sin(deg2rad($value->check_out_lat)) + cos(deg2rad($value->check_in_lat)) * cos(deg2rad($value->check_out_lat)) * cos(deg2rad($theta));
+                $dist = acos($dist);
+                $dist = rad2deg($dist);
+                $miles = $dist * 60 * 1.1515;
+                $km = $miles * 1.609344;
+                $data['list'][$key]->distance = round($km, 2);
+            }
         }
-
         return view('masterdata::crew.detail', $data);
     }
 }
