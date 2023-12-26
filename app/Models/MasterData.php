@@ -249,7 +249,7 @@ class MasterData extends Model
     //CREW
     public function scopeGetMasterCrewList($query)
     {
-        $query = DB::table("v2_employee_history")
+        $query = DB::table("employee_history")
             ->select('*')
             ->orderBy('id')
             ->get();
@@ -259,7 +259,7 @@ class MasterData extends Model
 
     public function scopeGetMasterCrew($query, $uuid)
     {
-        $query = DB::table("v2_employee_history")
+        $query = DB::table("employee_history")
             ->where('id', $uuid)
             ->first();
 
@@ -268,7 +268,7 @@ class MasterData extends Model
 
     public function scopeGetMasterCrewAttendance($query, $uuid)
     {
-        $query = DB::table("v2_employee_attendance")
+        $query = DB::table("employee_attendance")
             ->select('*')
             ->where('employee_id', $uuid)
             ->orderBy('id', 'desc')
