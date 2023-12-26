@@ -141,7 +141,7 @@ class Role extends Model
 
     public function scopeCheckRoleContains($query, $uuid)
     {
-        $query = DB::table("users")
+        $query = DB::table("v2_users")
             ->where('role_uuid',$uuid)
             ->get();
 
