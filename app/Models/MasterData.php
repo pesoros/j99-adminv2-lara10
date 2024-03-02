@@ -14,6 +14,7 @@ class MasterData extends Model
         $query = DB::table("v2_bus AS bus")
             ->select('bus.uuid','bus.name','bus.registration_number','bus.brand','bus.model','bus.status','class.name AS class','class.seat')
             ->join("v2_class AS class", "class.uuid", "=", "bus.class_uuid")
+            ->where('bus.category','PARIWISATA')
             ->orderBy('bus.created_at')
             ->get();
 
@@ -32,6 +33,7 @@ class MasterData extends Model
         $query = DB::table("v2_bus AS bus")
             ->select('bus.*','class.name AS class')
             ->join("v2_class AS class", "class.uuid", "=", "bus.class_uuid")
+            ->where('bus.category','PARIWISATA')
             ->where('bus.uuid', $uuid)
             ->first();
 
@@ -118,6 +120,7 @@ class MasterData extends Model
     {
         $query = DB::table("v2_class")
             ->select('id','uuid','name','seat')
+            ->whereNull('seat_numbers')
             ->orderBy('id')
             ->get();
 

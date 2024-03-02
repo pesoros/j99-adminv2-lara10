@@ -12,7 +12,7 @@ class MasterdataClassController extends Controller
 {
     public function listMasterClass()
     {
-        $data['title'] = 'Bus';
+        $data['title'] = 'Kelas';
         $data['list'] = MasterData::getMasterClassList();
 
         return view('masterdata::class.index', $data);
@@ -20,7 +20,7 @@ class MasterdataClassController extends Controller
 
     public function addMasterClass()
     {
-        $data['title'] = 'Tambah Master Bus';
+        $data['title'] = 'Tambah Master Kelas';
         $data['facilities'] = MasterData::getMasterFacilitiesList();
 
         return view('masterdata::class.add', $data);
@@ -62,6 +62,7 @@ class MasterdataClassController extends Controller
         $data['current'] = MasterData::getMasterClass($uuid);
         $data['facilities'] = MasterData::getMasterFacilitiesList();
         $tempSelected = MasterData::getMasterClassFacilities($data['current']->id);
+        $data['selectedFacilities'] = [];
         foreach ($tempSelected as $key => $value) {
             $data['selectedFacilities'][$key] = intval($value->facilities_id);
         }

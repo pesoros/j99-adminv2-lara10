@@ -43,7 +43,6 @@ class MasterdataBusController extends Controller
             'brand' => $request->brand,
             'model' => $request->model,
             'class_uuid' => $request->class_uuid,
-            'status' => 1,
         ];
         
         $saveBus = MasterData::saveMasterBus($saveData);

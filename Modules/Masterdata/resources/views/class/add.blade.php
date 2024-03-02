@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
           <label for="seat_count">Jumlah kursi</label>
-          <input type="number" class="form-control" id="seat_count" name="seat_count" placeholder="Masukkan nama kelas" value="{{ old('seat_count') }}">
+          <input type="number" class="form-control" id="seat_count" name="seat_count" placeholder="Masukkan jumlah kursi" value="{{ old('seat_count') }}">
         </div>
         <div class="form-group">
           <label>Fasilitas</label>
