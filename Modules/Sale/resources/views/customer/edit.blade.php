@@ -43,6 +43,10 @@
           <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Masukkan nama pelanggan" value="{{ $current->name }}">
         </div>
         <div class="form-group">
+          <label for="customer_email">Email Pelanggan</label>
+          <input type="text" class="form-control" id="customer_email" name="customer_email" placeholder="Masukkan email pelanggan" value="{{ $current->email }}">
+        </div>
+        <div class="form-group">
           <label for="id_number">Nomor Identitas</label>
           <input type="text" class="form-control" id="id_number" name="id_number" placeholder="Masukkan nomor identitas" value="{{ $current->id_number }}">
         </div>
@@ -63,6 +67,17 @@
         <div class="form-group">
           <label>Alamat</label>
           <textarea class="form-control" name="address" rows="3" placeholder="Masukkan alamat">{{ $current->address }}</textarea>
+        </div>
+        <div class="form-group">
+          <label>Kategori</label>
+          <select class="form-control select2bs4" name="category" style="width: 100%;" required>
+            <option value="">Pilih kategori</option>
+            @foreach ($category as $categoryItem)
+                <option value="{{ $categoryItem }}" @selected($current->category == $categoryItem)>
+                    {{ $categoryItem }}
+                </option>
+            @endForeach
+          </select>
         </div>
       </div>
     </div>

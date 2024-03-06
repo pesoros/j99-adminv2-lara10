@@ -10,6 +10,16 @@ use App\Models\Sale;
 
 class SaleCustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->userCategoryList = [
+            'Biro',
+            'Instansi',
+            'User',
+            'Lain-lain',
+        ];
+    }
+
     public function listCustomer()
     {
         $data['title'] = 'Customer';
@@ -22,6 +32,7 @@ class SaleCustomerController extends Controller
     {
         $data['title'] = 'Tambah Customer';
         $data['city'] = Sale::getMasterCityList();
+        $data['category'] = $this->userCategoryList;
 
         return view('sale::customer.add', $data);
     }
@@ -30,19 +41,23 @@ class SaleCustomerController extends Controller
     {
         $credentials = $request->validate([
             'customer_name'   => ['required', 'string'],
+            'customer_email'  => ['required', 'string'],
             'id_number'       => ['required', 'string'],
             'phone'           => ['required', 'string'],
             'city'            => ['required', 'string'],
             'address'         => ['required', 'string'],
+            'category'         => ['required', 'string'],
         ]);
         
         $saveData = [
             'uuid' => generateUuid(),
             'name' => $request->customer_name,
+            'email' => $request->customer_email,
             'id_number' => $request->id_number,
             'phone' => $request->phone,
             'city_uuid' => $request->city,
             'address' => $request->address,
+            'category' => $request->category,
         ];
         
         $saveCustomer = Sale::saveCustomer($saveData);
@@ -59,6 +74,7 @@ class SaleCustomerController extends Controller
         $data['title'] = 'Ubah Customer';
         $data['city'] = Sale::getMasterCityList();
         $data['current'] = Sale::getCustomer($uuid);
+        $data['category'] = $this->userCategoryList;
 
         return view('sale::customer.edit', $data);
     }
@@ -67,18 +83,22 @@ class SaleCustomerController extends Controller
     {
         $credentials = $request->validate([
             'customer_name'   => ['required', 'string'],
+            'customer_email'  => ['required', 'string'],
             'id_number'       => ['required', 'string'],
             'phone'           => ['required', 'string'],
             'city'            => ['required', 'string'],
             'address'         => ['required', 'string'],
+            'category'         => ['required', 'string'],
         ]);
         
         $updateData = [
             'name' => $request->customer_name,
+            'email' => $request->customer_email,
             'id_number' => $request->id_number,
             'phone' => $request->phone,
             'city_uuid' => $request->city,
             'address' => $request->address,
+            'category' => $request->category,
         ];
         
         $updateCustomer = Sale::updateCustomer($uuid, $updateData);
