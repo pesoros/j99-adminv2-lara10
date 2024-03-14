@@ -172,6 +172,15 @@
             <input type="text" class="form-control moneyform" name="total_price" placeholder="0" readonly>
           </div>
         </div>
+        <div class="form-group">
+          <label for="downpayment">Down Payment</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp</span>
+            </div>
+            <input type="text" class="form-control moneyform" name="downpayment" placeholder="0" value="{{ $current->down_payment }}" required>
+          </div>
+        </div>
       </div>
     </div>
     </div>

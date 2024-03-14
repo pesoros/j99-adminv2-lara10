@@ -105,11 +105,13 @@ class SaleBookController extends Controller
             'address'    => ['required', 'string'],
             'city_from'  => ['required', 'string'],
             'city_to'    => ['required', 'string'],
+            'downpayment'   => ['required', 'string'],
         ]);
 
         $dateRange = explode('-',$request->bookdate);
         $dateFrom = dateTimeRangeFormatToSave($dateRange[0]);
         $dateTo = dateTimeRangeFormatToSave($dateRange[1]);
+        $finalPayment = numberClearence($request->total_price) - numberClearence($request->downpayment);
         
         $updateData = [
             'start_date'            => $dateFrom,
@@ -124,6 +126,8 @@ class SaleBookController extends Controller
             'tax'                   => numberClearence($request->tax),
             'total_price'           => numberClearence($request->total_price),
             'updated_by'             => auth()->user()->uuid,
+            'down_payment'          => numberClearence($request->downpayment),
+            'final_payment'         => $finalPayment,
         ];
 
         $updateBusData = [];

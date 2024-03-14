@@ -116,7 +116,6 @@
           <!-- /.col -->
           <div class="col-6">
             <p class="lead">Biaya</p>
-
             <div class="table-responsive">
               <table class="table">
                 <tr>
@@ -132,8 +131,21 @@
                   <td>{{ formatAmount($detailBook->tax) }}</td>
                 </tr>
                 <tr>
-                  <th style="width:50%">biaya:</th>
+                  <th style="width:50%">Total Biaya:</th>
                   <td>{{ formatAmount($detailBook->total_price) }}</td>
+                </tr>
+              </table>
+
+            <p class="lead">Pembayaran</p>
+            <div class="table-responsive">
+              <table class="table">
+                <tr>
+                  <th style="width:50%">Down Payment:</th>
+                  <td>{{ formatAmount($detailBook->down_payment) }}</td>
+                </tr>
+                <tr>
+                  <th style="width:50%">Pelunasan:</th>
+                  <td>{{ formatAmount($detailBook->final_payment) }}</td>
                 </tr>
               </table>
             </div>

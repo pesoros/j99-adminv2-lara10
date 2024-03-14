@@ -133,6 +133,8 @@ class Sale extends Model
                 'book.tax',
                 'book.total_price',
                 'book.notes',
+                'book.down_payment',
+                'book.final_payment',
                 'customer.name AS customer_name',
                 'customer.email AS customer_email',
                 'customer.phone AS customer_phone',
