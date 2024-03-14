@@ -40,7 +40,8 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label>Pelanggan</label>
-          <select class="form-control select2bs4" name="customer" style="width: 100%;">
+          <select class="form-control select2bs4" name="customer" style="width: 100%;" required>
+            <option value="">Pilih<option>
             @foreach ($customer as $customerItem)
                 <option value="{{ $customerItem->uuid }}" @selected(old('city_from') == $customerItem->uuid)>
                     {{ $customerItem->name }}
@@ -73,21 +74,23 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label>Kota Penjemputan</label>
-          <select class="form-control select2bs4" name="city_from" style="width: 100%;">
+          <select class="form-control select2bs4" name="city_from" style="width: 100%;" required>
+            <option value="">Pilih<option>
             @foreach ($city as $cityItem)
-            <option value="{{ $cityItem->uuid }}" @selected(old('city_from') == $cityItem->uuid)>
-              {{ $cityItem->name }}
-            </option>
+              <option value="{{ $cityItem->uuid }}" @selected(old('city_from') == $cityItem->uuid)>
+                {{ $cityItem->name }}
+              </option>
             @endForeach
           </select>
         </div>
         <div class="form-group">
           <label>Kota Tujuan</label>
-          <select class="form-control select2bs4" name="city_to" style="width: 100%;">
+          <select class="form-control select2bs4" name="city_to" style="width: 100%;" required>
+            <option value="">Pilih<option>
             @foreach ($city as $cityItem)
-            <option value="{{ $cityItem->uuid }}" @selected(old('city_to') == $cityItem->uuid)>
-              {{ $cityItem->name }}
-            </option>
+              <option value="{{ $cityItem->uuid }}" @selected(old('city_to') == $cityItem->uuid)>
+                {{ $cityItem->name }}
+              </option>
             @endForeach
           </select>
         </div>
@@ -102,7 +105,8 @@
           <div id="busForm">
             <div class="row">
               <div class="col-sm-6">
-                <select class="form-control select2bs4" name="bus[]" style="width: 100%;">
+                <select class="form-control select2bs4" name="bus[]" style="width: 100%;" required>
+                  <option value="">Pilih<option>
                   @foreach ($bus as $busItem)
                       <option value="{{ $busItem->uuid }}" @selected(old('bus[]') == $busItem->uuid)>
                           {{ $busItem->name }} | {{ $busItem->class }} | {{ $busItem->seat }} Kursi
@@ -165,6 +169,15 @@
               <span class="input-group-text">Rp</span>
             </div>
             <input type="text" class="form-control moneyform" name="total_price" placeholder="0" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="downpayment">Down Payment</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp</span>
+            </div>
+            <input type="text" class="form-control moneyform" name="downpayment" placeholder="0" required>
           </div>
         </div>
       </div>
