@@ -5,7 +5,6 @@ use Modules\Masterdata\app\Http\Controllers\MasterdataBusController;
 use Modules\Masterdata\app\Http\Controllers\MasterdataClassController;
 use Modules\Masterdata\app\Http\Controllers\MasterdataFacilitiesController;
 use Modules\Masterdata\app\Http\Controllers\MasterdataCityController;
-use Modules\Masterdata\app\Http\Controllers\MasterdataCrewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +47,5 @@ Route::middleware(['auth','has-permission'])->group(function () {
         Route::get('city/edit/{uuid}', [MasterdataCityController::class, 'editMasterCity']);
         Route::post('city/edit/{uuid}', [MasterdataCityController::class, 'editMasterCityUpdate']);
         Route::get('city/delete/{uuid}', [MasterdataCityController::class, 'deleteMasterCity']);
-        //Crew
-        Route::get('crew', [MasterdataCrewController::class, 'listMasterCrew']);
-        Route::get('crew/attendance/{uuid}', [MasterdataCrewController::class, 'attendanceMasterCrew']);
     });
 });
