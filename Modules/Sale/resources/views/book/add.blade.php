@@ -172,12 +172,21 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="downpayment">Down Payment</label>
+          <label for="downpayment">Uang Muka</label>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Rp</span>
             </div>
             <input type="text" class="form-control moneyform" name="downpayment" placeholder="0" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="finalpayment">Pelunasan</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp</span>
+            </div>
+            <input type="text" class="form-control moneyform" name="finalpayment" placeholder="0">
           </div>
         </div>
       </div>

@@ -140,13 +140,15 @@
             <div class="table-responsive">
               <table class="table">
                 <tr>
-                  <th style="width:50%">Down Payment:</th>
+                  <th style="width:50%">Uang Muka:</th>
                   <td>{{ formatAmount($detailBook->down_payment) }}</td>
                 </tr>
-                <tr>
-                  <th style="width:50%">Pelunasan:</th>
-                  <td>{{ formatAmount($detailBook->final_payment) }}</td>
-                </tr>
+                @if ($detailBook->final_payment > 0)
+                  <tr>
+                    <th style="width:50%">Pelunasan:</th>
+                    <td>{{ formatAmount($detailBook->final_payment) }}</td>
+                  </tr>
+                @endif
               </table>
             </div>
           </div>

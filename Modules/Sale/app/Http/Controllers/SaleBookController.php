@@ -38,6 +38,7 @@ class SaleBookController extends Controller
             'city_from'     => ['required', 'string'],
             'city_to'       => ['required', 'string'],
             'downpayment'   => ['required', 'string'],
+            'finalpayment'  => ['required', 'string'],
         ]);
 
         $dateRange = explode('-',$request->bookdate);
@@ -45,7 +46,6 @@ class SaleBookController extends Controller
         $dateTo = dateTimeRangeFormatToSave($dateRange[1]);
         $bookingCode = generateCode('JBK');
         $uuid = generateUuid();
-        $finalPayment = numberClearence($request->total_price) - numberClearence($request->downpayment);
         
         $saveData = [
             'uuid'                  => $uuid,
@@ -64,7 +64,7 @@ class SaleBookController extends Controller
             'total_price'           => numberClearence($request->total_price),
             'booked_by'             => auth()->user()->uuid,
             'down_payment'          => numberClearence($request->downpayment),
-            'final_payment'         => $finalPayment,
+            'final_payment'         => numberClearence($request->finalpayment ?? NULL),
         ];
 
         $saveBusData = [];
@@ -101,17 +101,17 @@ class SaleBookController extends Controller
     public function editBookUpdate(Request $request, $uuid)
     {
         $credentials = $request->validate([
-            'bookdate'   => ['required', 'string'],
-            'address'    => ['required', 'string'],
-            'city_from'  => ['required', 'string'],
-            'city_to'    => ['required', 'string'],
+            'bookdate'      => ['required', 'string'],
+            'address'       => ['required', 'string'],
+            'city_from'     => ['required', 'string'],
+            'city_to'       => ['required', 'string'],
             'downpayment'   => ['required', 'string'],
+            'finalpayment'  => ['required', 'string'],
         ]);
 
         $dateRange = explode('-',$request->bookdate);
         $dateFrom = dateTimeRangeFormatToSave($dateRange[0]);
         $dateTo = dateTimeRangeFormatToSave($dateRange[1]);
-        $finalPayment = numberClearence($request->total_price) - numberClearence($request->downpayment);
         
         $updateData = [
             'start_date'            => $dateFrom,
@@ -127,7 +127,7 @@ class SaleBookController extends Controller
             'total_price'           => numberClearence($request->total_price),
             'updated_by'             => auth()->user()->uuid,
             'down_payment'          => numberClearence($request->downpayment),
-            'final_payment'         => $finalPayment,
+            'final_payment'         => numberClearence($request->finalpayment ?? NULL),
         ];
 
         $updateBusData = [];
