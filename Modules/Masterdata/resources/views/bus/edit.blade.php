@@ -64,6 +64,10 @@
             @endForeach
           </select>
         </div>
+        <div class="form-group">
+          <label for="email_bus">Email Bus</label>
+          <input type="text" class="form-control" id="email_bus" name="email_bus" placeholder="Masukkan email bus" value="{{ $current->email }}">
+        </div>
       </div>
     </div>
     <div class="card-footer">

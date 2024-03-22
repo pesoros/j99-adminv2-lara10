@@ -29,11 +29,12 @@ class MasterdataBusController extends Controller
     public function addMasterBusStore(Request $request)
     {
         $credentials = $request->validate([
-            'bus_name'      => ['required', 'string'],
+            'bus_name'              => ['required', 'string'],
             'registration_number'   => ['required', 'string'],
-            'brand'   => ['required', 'string'],
-            'model'   => ['required', 'string'],
-            'class_uuid'   => ['required', 'string'],
+            'brand'                 => ['required', 'string'],
+            'model'                 => ['required', 'string'],
+            'class_uuid'            => ['required', 'string'],
+            'email_bus'             => ['required', 'string'],
         ]);
         
         $saveData = [
@@ -43,6 +44,7 @@ class MasterdataBusController extends Controller
             'brand' => $request->brand,
             'model' => $request->model,
             'class_uuid' => $request->class_uuid,
+            'email' => $request->email_bus,
         ];
         
         $saveBus = MasterData::saveMasterBus($saveData);
@@ -71,6 +73,7 @@ class MasterdataBusController extends Controller
             'brand'                 => ['required', 'string'],
             'model'                 => ['required', 'string'],
             'class_uuid'            => ['required', 'string'],
+            'email_bus'             => ['required', 'string'],
         ]);
         
         $updateData = [
@@ -79,6 +82,7 @@ class MasterdataBusController extends Controller
             'brand' => $request->brand,
             'model' => $request->model,
             'class_uuid' => $request->class_uuid,
+            'email' => $request->email_bus,
             'status' => 1,
         ];
         
