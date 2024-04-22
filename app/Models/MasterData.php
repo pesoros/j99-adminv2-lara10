@@ -248,4 +248,33 @@ class MasterData extends Model
 
         return $query;
     }
+
+    //CLASS LIMIT
+    public function scopeGetClassLimit($query, $uuid)
+    {
+        $query = DB::table("v2_class_limit")
+            ->select('*')
+            ->where('class_uuid', $uuid)
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeSaveMasterClassLimit($query, $data)
+    {
+        $query = DB::table("v2_class_limit")->insert($data);
+
+        return $query;
+    }
+
+    public function scopeRemoveMasterClassLimit($query, $id)
+    {
+        $query = DB::table("v2_class_limit")
+            ->where('id',$id)
+            ->delete();
+
+        return $query;
+    }
 }

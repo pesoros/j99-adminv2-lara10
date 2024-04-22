@@ -150,6 +150,11 @@
   integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg==" 
   crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<!-- Bootstrap 4 DatePicker -->
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <!-- Page specific script -->
 @stack('extra-scripts')
 <script type="text/javascript">
@@ -194,6 +199,24 @@
       locale: {
         format: 'DD/MM/YYYY hh:mm A'
       }
+    })
+
+
+    $('#monthyearpicker').datepicker({
+      format: 'mm/yyyy',
+      icons: {
+        time: 'fa fa-time',
+        date: 'fa fa-calendar',
+        up: 'fa fa-chevron-up',
+        down: 'fa fa-chevron-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-screenshot',
+        clear: 'fa fa-trash',
+        close: 'fa fa-remove'
+      },
+      startView: "months",
+      minViewMode: "months"
     })
   });
 </script>

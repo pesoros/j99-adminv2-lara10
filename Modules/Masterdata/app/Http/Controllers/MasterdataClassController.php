@@ -61,6 +61,7 @@ class MasterdataClassController extends Controller
         $data['title'] = 'Edit Master Class';
         $data['current'] = MasterData::getMasterClass($uuid);
         $data['facilities'] = MasterData::getMasterFacilitiesList();
+        $data['limit'] = MasterData::getClassLimit($uuid);
         $tempSelected = MasterData::getMasterClassFacilities($data['current']->id);
         $data['selectedFacilities'] = [];
         foreach ($tempSelected as $key => $value) {
@@ -122,5 +123,42 @@ class MasterdataClassController extends Controller
         }
 
         return back()->with('success', 'Master kelas gagal terhapus!');
+    }
+
+    public function addMasterClassLimit(Request $request, $uuid) {
+        $credentials = $request->validate([
+            'limit_count'      => ['required'],
+            'limit_date'   => ['required'],
+        ]);
+
+        $date = explode('/', $request->limit_date);
+
+        // echo("<script>console.log('PHP: " . json_encode($date) . "');</script>");
+
+        $data = [
+            'class_uuid' => $uuid,
+            'month' => $date[0],
+            'year' => $date[1],
+            'limit' => $request->limit_count,
+        ];
+
+        $saveLimit = MasterData::saveMasterClassLimit($data);
+
+        if ($saveLimit) {
+            return back()->with('success', 'Master limit kelas berhasil ditambah!');
+        }
+
+        return back()->with('failed', 'Master limit kelas gagal ditambah!'); 
+    }
+
+    public function deleteMasterClassLimit($id) {
+
+        $delete = MasterData::removeMasterClassLimit($id);
+
+        if ($delete) {
+            return back()->with('success', 'Master limit kelas berhasil terhapus!');
+        }
+
+        return back()->with('success', 'Master limit kelas gagal terhapus!');
     }
 }
