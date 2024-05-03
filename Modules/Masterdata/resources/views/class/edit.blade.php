@@ -71,5 +71,66 @@
     </div>
   </form>
 </div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">List Max Penggunaan Unit Kelas {{ $current->name }}</h3>
+    </div>
+    <form action="{{ url('masterdata/class/add/limit') }}/{{ $current->uuid }}" method="post">
+      @csrf
+      <div class="card-body row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="limit_count">Max Penggunaan Unit</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input type="number" class="form-control" id="limit_count" name="limit_count" placeholder="Masukkan Limit Penggunaan Unit">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input type="text" class="form-control" id="monthyearpicker" name="limit_date">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="datatable-def" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>Limit Penggunaan Unit</th>
+          <th>Bulan</th>
+          <th>Tahun</th>
+          <th>Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+          @foreach ($limit as $key => $value)
+            <tr>
+              <td width="20" class="text-center">{{ intval($key) + 1 }}</td>
+              <td>{{ $value->limit }}</td>
+              <td>{{ $value->month }}</td>
+              <td>{{ $value->year }}</td>
+              <td>
+                <div class="btn-group btn-block">
+                  @if (permissionCheck('delete')) <a href="{{ url('masterdata/class/delete/limit/'.$value->id) }}" onclick="return confirm('Anda yakin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a> @endif
+                </div>
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
  
 @endsection
