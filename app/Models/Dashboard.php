@@ -20,7 +20,7 @@ class Dashboard extends Model
     }
     public function scopeGetDashBusAgenda($query, $bus_uuid)
     {
-        $start = Carbon::now();
+        $start = Carbon::now()->subDays(30);
         $finish = Carbon::now()->addDays(90);
         $query = DB::table("v2_book_bus AS bookbus")
             ->select('book.uuid','book.start_date','book.finish_date','customer.name AS customername')
