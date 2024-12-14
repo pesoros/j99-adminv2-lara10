@@ -173,6 +173,13 @@
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#datatable-def_wrapper .col-md-6:eq(0)');
 
+    //Custom datatable
+    $("#datatable-def-custom").DataTable({
+      "responsive": true, "lengthChange": true, "autoWidth": false,
+      "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']],
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#datatable-def-custom_wrapper .col-md-6:eq(0)');
+
     //Timepicker
     $('#timepicker').datetimepicker({
       format: 'LT'

@@ -72,6 +72,7 @@ class Sale extends Model
                 'book.booking_code',
                 'book.start_date',
                 'book.finish_date',
+                'book.total_price',
                 'customer.name as customer_name',
                 'city_from.name as city_from',
                 'city_to.name as city_to'
