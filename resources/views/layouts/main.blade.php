@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
@@ -36,47 +37,48 @@
   <link rel="stylesheet" href="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.css')}}">
   <style>
     @media print {
-      footer  {
+      footer {
         display: none;
       }
     }
   </style>
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{asset('assets/images/logo/j99-favicon.png')}}" alt="J99 logo preloader" style="width: 10%">
-  </div>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="{{asset('assets/images/logo/j99-favicon.png')}}" alt="J99 logo preloader" style="width: 10%">
+    </div>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    @include('layouts.shared.navbar')
-  </nav>
-  <!-- /.navbar -->
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      @include('layouts.shared.navbar')
+    </nav>
+    <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="/" class="brand-link">
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="/" class="brand-link">
         <img src="{{asset('assets/images/logo/j99-logo-wide.png')}}" alt="J99 Logo" height="38" style="opacity: .8">
         <span class="brand-text font-weight-light"></span>
-    </a>
+      </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Profile -->
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Profile -->
         @include('layouts.shared.profile')
-      <!-- Menu -->
+        <!-- Menu -->
         @include('layouts.shared.menu')
-      </nav>
-    </div>
-  </aside>
+        </nav>
+      </div>
+    </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <div class="content-header">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -84,148 +86,164 @@
             </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-    </div>
-    <section class="content">
+      </div>
+      <section class="content">
         <div class="container-fluid">
-            @yield('content')
+          @yield('content')
         </div>
-    </section>
+      </section>
+    </div>
+    <!-- /.content-wrapper -->
+    @include('layouts.shared.footer')
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
   </div>
-  <!-- /.content-wrapper -->
-  @include('layouts.shared.footer')
+  <!-- ./wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  <!-- jQuery -->
+  <script src="{{asset('assets/ui/plugins/jquery/jquery.min.js')}}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{{asset('assets/ui/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="{{asset('assets/ui/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- Select2 -->
+  <script src="{{asset('assets/ui/plugins/select2/js/select2.full.min.js')}}"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="{{asset('assets/ui/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/jszip/jszip.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/pdfmake/pdfmake.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/pdfmake/vfs_fonts.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+  <!-- Custom CSS -->
+  <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+  <!-- ChartJS -->
+  <script src="{{asset('assets/ui/plugins/chart.js/Chart.min.js')}}"></script>
+  <!-- Sparkline -->
+  <script src="{{asset('assets/ui/plugins/sparklines/sparkline.js')}}"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="{{asset('assets/ui/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+  <!-- daterangepicker -->
+  <script src="{{asset('assets/ui/plugins/moment/moment.min.js')}}"></script>
+  <script src="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.js')}}"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="{{asset('assets/ui/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+  <!-- Summernote -->
+  <script src="{{asset('assets/ui/plugins/summernote/summernote-bs4.min.js')}}"></script>
+  <!-- date-range-picker -->
+  <script src="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.js')}}"></script>
+  <!-- overlayScrollbars -->
+  <script src="{{asset('assets/ui/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{asset('assets/ui/dist/js/adminlte.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"
+    integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  </script>
+  <!-- Bootstrap 4 DatePicker -->
+  <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+  <!-- Page specific script -->
+  @stack('extra-scripts')
+  <script type="text/javascript">
+    $(function() {
+      // money format input.
+      $('.moneyform').mask('000.000.000', {
+        reverse: true
+      });
 
-<!-- jQuery -->
-<script src="{{asset('assets/ui/plugins/jquery/jquery.min.js')}}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{asset('assets/ui/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('assets/ui/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- Select2 -->
-<script src="{{asset('assets/ui/plugins/select2/js/select2.full.min.js')}}"></script>
-<!-- DataTables  & Plugins -->
-<script src="{{asset('assets/ui/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/jszip/jszip.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{asset('assets/ui/plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{asset('assets/ui/plugins/sparklines/sparkline.js')}}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{asset('assets/ui/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
-<!-- daterangepicker -->
-<script src="{{asset('assets/ui/plugins/moment/moment.min.js')}}"></script>
-<script src="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{asset('assets/ui/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<!-- Summernote -->
-<script src="{{asset('assets/ui/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!-- date-range-picker -->
-<script src="{{asset('assets/ui/plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- overlayScrollbars -->
-<script src="{{asset('assets/ui/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('assets/ui/dist/js/adminlte.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js" 
-  integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg==" 
-  crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
-<!-- Bootstrap 4 DatePicker -->
-<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" />
-<!-- Page specific script -->
-@stack('extra-scripts')
-<script type="text/javascript">
-  $(function () {
-    // money format input.
-    $('.moneyform').mask('000.000.000', {reverse: true});
+      $('.select2').select2()
 
-    $('.select2').select2()
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+      $("#datatable-def").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#datatable-def_wrapper .col-md-6:eq(0)');
 
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-    $("#datatable-def").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#datatable-def_wrapper .col-md-6:eq(0)');
+      //Custom datatable
+      $("#datatable-def-custom").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": false,
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, 'All']
+        ],
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#datatable-def-custom_wrapper .col-md-6:eq(0)');
 
-    //Custom datatable
-    $("#datatable-def-custom").DataTable({
-      "responsive": true, "lengthChange": true, "autoWidth": false,
-      "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']],
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#datatable-def-custom_wrapper .col-md-6:eq(0)');
+      //Timepicker
+      $('#timepicker').datetimepicker({
+        format: 'LT'
+      })
 
-    //Timepicker
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    })
-
-    //Date picker
-    $('#datepicker').datetimepicker({
+      //Date picker
+      $('#datepicker').datetimepicker({
         format: 'L'
+      });
+
+      //Date and time picker
+      $('#datetimepicker').datetimepicker({
+        icons: {
+          time: 'far fa-clock'
+        }
+      });
+
+      //Date range picker
+      $('#daterangepicker').daterangepicker({
+        locale: {
+          format: 'DD/MM/YYYY'
+        }
+      })
+      //Date range picker with time picker
+      $('#datetimerangepicker').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'DD/MM/YYYY hh:mm A'
+        }
+      })
+
+
+      $('#monthyearpicker').datepicker({
+        format: 'mm/yyyy',
+        icons: {
+          time: 'fa fa-time',
+          date: 'fa fa-calendar',
+          up: 'fa fa-chevron-up',
+          down: 'fa fa-chevron-down',
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-screenshot',
+          clear: 'fa fa-trash',
+          close: 'fa fa-remove'
+        },
+        startView: "months",
+        minViewMode: "months"
+      })
     });
-
-    //Date and time picker
-    $('#datetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
-
-    //Date range picker
-    $('#daterangepicker').daterangepicker({
-      locale: {
-        format: 'DD/MM/YYYY'
-      }
-    })
-    //Date range picker with time picker
-    $('#datetimerangepicker').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-        format: 'DD/MM/YYYY hh:mm A'
-      }
-    })
-
-
-    $('#monthyearpicker').datepicker({
-      format: 'mm/yyyy',
-      icons: {
-        time: 'fa fa-time',
-        date: 'fa fa-calendar',
-        up: 'fa fa-chevron-up',
-        down: 'fa fa-chevron-down',
-        previous: 'fa fa-chevron-left',
-        next: 'fa fa-chevron-right',
-        today: 'fa fa-screenshot',
-        clear: 'fa fa-trash',
-        close: 'fa fa-remove'
-      },
-      startView: "months",
-      minViewMode: "months"
-    })
-  });
-</script>
+  </script>
 </body>
+
 </html>

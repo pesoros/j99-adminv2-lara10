@@ -11,12 +11,15 @@
         <div class="row">
           <div class="col-12">
             <h4>
-              <img src="{{asset('assets/images/logo/j99-logo-wide.png')}}" alt="J99 Logo" height="38" style="opacity: .8">
-              <small class="float-right">{{ dateFormat($detailBook->created_at) }}</small>
+              <img src="{{asset('assets/images/logo/j99-logo-wide.png')}}" alt="J99 Logo" height="70" style="opacity: .8">
+              <small class="float-right">Kode Booking: {{ $detailBook->booking_code }}<br>Tanggal: {{ dateFormat($detailBook->created_at) }}</small>
+              <small class="float-right"></small>
             </h4>
           </div>
           <!-- /.col -->
         </div>
+        <br>
+        <br>
         <!-- info row -->
         <div class="row invoice-info">
           <div class="col-sm-6 invoice-col">
@@ -84,23 +87,23 @@
             <p class="lead">Bus</p>
             <table class="table table-striped">
               <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama bus</th>
-                <th>Kelas</th>
-                <th>Seat</th>
-                <th width="15%">Harga</th>
-              </tr>
+                <tr>
+                  <th>No</th>
+                  <th>Nama bus</th>
+                  <th>Kelas</th>
+                  <th>Seat</th>
+                  <th width="15%">Harga</th>
+                </tr>
               </thead>
               <tbody>
                 @foreach ($bookbus as $key => $bus)
-                  <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $bus->name }}</td>
-                    <td>{{ $bus->classname }}</td>
-                    <td>{{ $bus->seat }}</td>
-                    <td>{{ formatAmount($bus->price) }}</td>
-                  </tr>
+                <tr>
+                  <td>{{ $key + 1 }}</td>
+                  <td>{{ $bus->name }}</td>
+                  <td>{{ $bus->classname }}</td>
+                  <td>{{ $bus->seat }}</td>
+                  <td>{{ formatAmount($bus->price) }}</td>
+                </tr>
                 @endforeach
               </tbody>
             </table>
@@ -136,25 +139,78 @@
                 </tr>
               </table>
 
-            <p class="lead">Pembayaran</p>
-            <div class="table-responsive">
-              <table class="table">
-                <tr>
-                  <th style="width:50%">Uang Muka:</th>
-                  <td>{{ formatAmount($detailBook->down_payment) }}</td>
-                </tr>
-                @if ($detailBook->final_payment > 0)
+              <p class="lead">Pembayaran</p>
+              <div class="table-responsive">
+                <table class="table">
+                  <tr>
+                    <th style="width:50%">Uang Muka:</th>
+                    <td>{{ formatAmount($detailBook->down_payment) }}</td>
+                  </tr>
+                  @if ($detailBook->final_payment > 0)
                   <tr>
                     <th style="width:50%">Pelunasan:</th>
                     <td>{{ formatAmount($detailBook->final_payment) }}</td>
                   </tr>
-                @endif
-              </table>
+                  @endif
+                </table>
+              </div>
             </div>
+            <!-- /.col -->
           </div>
-          <!-- /.col -->
+          <!-- /.row -->
         </div>
-        <!-- /.row -->
+
+        <br>
+        <hr>
+        <br>
+
+        <!-- t&c column -->
+        <div class="row tnc-section">
+          <div class="col-12 tnc-place">
+            <p>Maka dengan ini akan memenuhi syarat dan ketentuan sebagai berikut:</p>
+            <ol>
+              <li>Harga sewa diatas termasuk: BBM, Driver & Assistant Driver selama perjalanan;</li>
+              <li>Harga sewa diatas belum termasuk: biaya parkir, biaya tol, kapal ferry, dll. Armada & akomodasi lain akan dibebankan kepada penyewa;</li>
+              <li>Harga yang tercantum dalam Surat Pemesanan ini bersifat tetap dan mengikat, kecuali terjadi perubahan harga BBM dari Pemerintah;</li>
+              <li>Apabila tidak dilakukan pembayaran tanda jadi sampai dengan tanggal jatuh tempo, maka booking sewa Bus dianggap batal;</li>
+              <li>Reschedule maksimal di lakukan 4 (empat) hari sebelum tanggal keberangkatan dengan dikenakan Reschedule fee 15% dari total harga sewa;</li>
+              <li>Reschedule tanpa biaya paling lambat dilakukan 14 (empat belas) hari sebelum tanggal keberangkatan dan hanya berlaku 1 (satu) kali serta dapat digunakan dalam jangka waktu 1 (satu) tahun; (ketentuan dan syarat berlaku);</li>
+              <li>Seluruh pembayaran yang sudah dilakukan tidak dapat ditarik kembali oleh sebab apapun;</li>
+              <li>Surat Pemesanan ini Bukan merupakan Bukti Pembayaran;</li>
+              <li>Surat pemesanan ini dianggap Sah, apabila kedua belah Pihak;</li>
+              <li>Pembayaran baru dianggap Sah apabila:(1)Ada bukti transfer dari penyewa, dan/atau, (2)Ada kuitansi yang dikeluarkan oleh Bagian Keuangan PT. Gilang Sembilan Sembilan;</li>
+              <li>Pembayaran dianggap Sah apabila melalui transfer pembayaran melalui virtual account yang tertera pada Invoice yang dikeluarkan oleh Bagian Keuangan PT. Gilang Sembilan Sembilan;</li>
+            </ol>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <!-- date column -->
+        <div class="row date-section">
+          <div class="col-12 date-place">
+            <p>Malang, _______________</p>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <!-- signature column -->
+        <div class="row signature-section">
+          <div class="col-5 signature-place">
+            <p>Sales Pariwisata</p>
+            <p>Juragan 99 Trans</p>
+          </div>
+          <div class="col-5 signature-place">
+            <p>Pemesan / Penyewa</p>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
 
         <!-- this row will not appear when printing -->
         <div class="row no-print">
@@ -168,20 +224,21 @@
             </button> --}}
           </div>
         </div>
-      </div>
-      <!-- /.invoice -->
-    </div><!-- /.col -->
-  </div><!-- /.row -->
-</div>
- 
-@endsection
-@push('extra-scripts')
-<script type="text/javascript">
-    $(function () {
-      $('a.printPage').click(function(){
-           window.print();
-           return false;
+
+
+        <!-- /.invoice -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div>
+
+  @endsection
+  @push('extra-scripts')
+  <script type="text/javascript">
+    $(function() {
+      $('a.printPage').click(function() {
+        window.print();
+        return false;
       });
     });
-</script>
-@endpush
+  </script>
+  @endpush

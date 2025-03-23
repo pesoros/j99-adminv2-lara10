@@ -1,0 +1,21 @@
+.signature-place {
+    text-align: center;
+    height: 250px;
+    align-content: start;
+    padding: 0px 30px;
+    border-bottom: solid;
+}
+
+.signature-section {
+    place-content: space-evenly;
+}
+
+.date-place>p {
+    text-align: right;
+}
+
+@media print { 
+    .signature-section { display:flex !important; } 
+}
+
+/* .signature-section { display: none; }  */
