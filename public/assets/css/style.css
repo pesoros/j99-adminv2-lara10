@@ -15,7 +15,13 @@
 }
 
 @media print { 
+    .tnc-section { display:flex !important; } 
+    .date-section { display:flex !important; } 
     .signature-section { display:flex !important; } 
+    .etc-section { display:block !important; } 
 }
 
-/* .signature-section { display: none; }  */
+.tnc-section { display: none; }
+.date-section { display: none; }
+.signature-section { display: none; }
+.etc-section { display: none; }

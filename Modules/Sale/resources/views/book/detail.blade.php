@@ -160,9 +160,11 @@
           <!-- /.row -->
         </div>
 
-        <br>
-        <hr>
-        <br>
+        <div class="etc-section">
+          <br>
+          <hr>
+          <br>
+        </div>
 
         <!-- t&c column -->
         <div class="row tnc-section">
@@ -184,8 +186,10 @@
           </div>
         </div>
 
-        <br>
-        <br>
+        <div class="etc-section">
+          <br>
+          <br>
+        </div>
 
         <!-- date column -->
         <div class="row date-section">
@@ -194,8 +198,10 @@
           </div>
         </div>
 
-        <br>
-        <br>
+        <div class="etc-section">
+          <br>
+          <br>
+        </div>
 
         <!-- signature column -->
         <div class="row signature-section">
