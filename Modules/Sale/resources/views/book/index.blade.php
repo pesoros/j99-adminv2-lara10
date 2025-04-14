@@ -13,7 +13,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="datatable-def" class="table table-bordered table-striped">
+      <table id="datatable-def-custom" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>No</th>
@@ -22,6 +22,7 @@
           <th>Kota</th>
           <th>Tanggal Penjemputan</th>
           <th>Tanggal Kembali</th>
+          <th>Total Harga</th>
           <th>Aksi</th>
         </tr>
         </thead>
@@ -34,6 +35,7 @@
               <td>{{ $value->city_from }} - {{ $value->city_to }}</td>
               <td>{{ dateTimeFormat($value->start_date) }}</td>
               <td>{{ dateTimeFormat($value->finish_date) }}</td>
+              <td>Rp. {{ number_format($value->total_price, 0) }}</td>
               <td>
                 <div class="btn-group btn-block">
                   @if (permissionCheck('show')) <a href="{{ url('sale/book/show/detail/'.$value->uuid) }}" class="btn btn-warning btn-sm">Detail</a> @endif
