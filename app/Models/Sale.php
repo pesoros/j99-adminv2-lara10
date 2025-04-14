@@ -10,7 +10,7 @@ class Sale extends Model
     public function scopeGetCustomerList($query)
     {
         $query = DB::table("v2_customer AS customer")
-            ->select('customer.*','city.name AS city_name')
+            ->select('customer.*', 'city.name AS city_name')
             ->join("v2_area_city AS city", "city.uuid", "=", "customer.city_uuid")
             ->orderBy('customer.name')
             ->get();
@@ -21,7 +21,7 @@ class Sale extends Model
     public function scopeGetMasterCityList($query)
     {
         $query = DB::table("v2_area_city")
-            ->select('uuid','name')
+            ->select('uuid', 'name')
             ->orderBy('name')
             ->get();
 
@@ -38,7 +38,7 @@ class Sale extends Model
     public function scopeGetCustomer($query, $uuid)
     {
         $query = DB::table("v2_customer AS customer")
-            ->select('customer.*','city.name AS city_name')
+            ->select('customer.*', 'city.name AS city_name')
             ->join("v2_area_city AS city", "city.uuid", "=", "customer.city_uuid")
             ->where("customer.uuid", $uuid)
             ->first();
@@ -49,7 +49,7 @@ class Sale extends Model
     public function scopeUpdateCustomer($query, $uuid, $data)
     {
         $query = DB::table("v2_customer")
-            ->where('uuid',$uuid)
+            ->where('uuid', $uuid)
             ->update($data);
 
         return $query;
@@ -58,7 +58,7 @@ class Sale extends Model
     public function scopeRemoveCustomer($query, $uuid)
     {
         $query = DB::table("v2_customer")
-            ->where('uuid',$uuid)
+            ->where('uuid', $uuid)
             ->delete();
 
         return $query;
@@ -80,7 +80,7 @@ class Sale extends Model
             ->leftJoin("v2_customer AS customer", "customer.uuid", "=", "book.customer_uuid")
             ->leftJoin("v2_area_city AS city_from", "city_from.uuid", "=", "book.departure_city_uuid")
             ->leftJoin("v2_area_city AS city_to", "city_to.uuid", "=", "book.destination_city_uuid")
-            ->orderBy('book.created_at')
+            ->orderBy('book.created_at', 'desc')
             ->get();
 
         return $query;
@@ -103,7 +103,7 @@ class Sale extends Model
     public function scopeUpdateBook($query, $uuid, $data)
     {
         $query = DB::table("v2_book")
-            ->where('uuid',$uuid)
+            ->where('uuid', $uuid)
             ->update($data);
 
         return $query;
@@ -112,7 +112,7 @@ class Sale extends Model
     public function scopeRemoveBook($query, $uuid)
     {
         $query = DB::table("v2_book")
-            ->where('uuid',$uuid)
+            ->where('uuid', $uuid)
             ->delete();
 
         return $query;
@@ -146,7 +146,7 @@ class Sale extends Model
             ->leftJoin("v2_customer AS customer", "customer.uuid", "=", "book.customer_uuid")
             ->leftJoin("v2_area_city AS city_from", "city_from.uuid", "=", "book.departure_city_uuid")
             ->leftJoin("v2_area_city AS city_to", "city_to.uuid", "=", "book.destination_city_uuid")
-            ->where('book.uuid',$uuid)
+            ->where('book.uuid', $uuid)
             ->orderBy('book.created_at')
             ->first();
 
@@ -156,7 +156,7 @@ class Sale extends Model
     public function scopeRemoveBookBus($query, $uuid)
     {
         $query = DB::table("v2_book_bus")
-            ->where('book_uuid',$uuid)
+            ->where('book_uuid', $uuid)
             ->delete();
 
         return $query;
@@ -165,14 +165,12 @@ class Sale extends Model
     public function scopeGetBookBus($query, $book_uuid)
     {
         $query = DB::table("v2_book_bus AS bookbus")
-            ->select('bus.name','bookbus.price', 'bookbus.bus_uuid', 'class.name as classname','class.seat')
+            ->select('bus.name', 'bookbus.price', 'bookbus.bus_uuid', 'class.name as classname', 'class.seat')
             ->join('v2_bus AS bus', 'bus.uuid', '=', 'bookbus.bus_uuid')
             ->join("v2_class AS class", "class.uuid", "=", "bus.class_uuid")
-            ->where('bookbus.book_uuid',$book_uuid)
+            ->where('bookbus.book_uuid', $book_uuid)
             ->get();
 
         return $query;
     }
-
-
 }
