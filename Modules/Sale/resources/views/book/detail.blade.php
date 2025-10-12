@@ -2,6 +2,22 @@
 
 @section('content')
 
+@if (session('success'))
+  <div class="alert alert-success alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
+  {{ session('success') }}
+  </div>
+@endif
+
+@if (session('failed'))
+  <div class="alert alert-danger alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <h5><i class="icon fas fa-ban"></i> Gagal!</h5>
+  {{ session('failed') }}
+  </div>
+@endif
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -234,6 +250,65 @@
 
         <!-- /.invoice -->
       </div><!-- /.col -->
+
+      <div class="invoice p-3 mb-3">
+        <div class="row">
+          <div class="col-12">
+            <p class="lead">Manajemen Pembayaran</p>
+            <div class="row">
+              <div class="col-12">
+                <form action="{{ url('sale/book/add-payment/'.$detailBook->uuid) }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group">
+                    <label for="">Nominal</label>
+                    <input type="text" name="amount" id="" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Deskripsi</label>
+                    <input type="text" name="description" id="" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">File</label>
+                    <input type="file" name="file" id="" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Nominal</th>
+                      <th>Deskripsi</th>
+                      <th>File</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($bookpayment as $key => $payment)
+                    <tr>
+                      <td>{{ $key + 1 }}</td>
+                      <td>{{ formatAmount($payment->amount) }}</td>
+                      <td>{{ $payment->description }}</td>
+                      <td><a href="{{ asset($payment->file) }}" target="_blank" class="btn btn-primary btn-sm">Lihat</a></td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="1">Total</th>
+                      <th colspan="3">{{ formatAmount($totalpayment) }}</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /.row -->
   </div>
 

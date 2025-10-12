@@ -80,7 +80,7 @@ class SaleBookController extends Controller
         $saveBookBus = Sale::saveBookBus($saveBusData);
 
         if ($saveBook) {
-            return back()->with('success', 'Booking tersimpan!');
+            return redirect('sale/book/show/detail/'.$uuid)->with('success', 'Booking tersimpan!');
         }
 
         return back()->with('failed', 'Booking gagal tersimpan!');   
@@ -144,7 +144,7 @@ class SaleBookController extends Controller
         $saveBookBus = Sale::saveBookBus($updateBusData);
 
         if ($updateBook) {
-            return back()->with('success', 'Booking berhasil diubah!');
+            return redirect('sale/book/show/detail/'.$uuid)->with('success', 'Booking berhasil diubah!');
         }
 
         return back()->with('failed', 'Booking gagal diubah!');   
@@ -162,7 +162,45 @@ class SaleBookController extends Controller
         $data['title'] = 'Detail Reservasi';
         $data['detailBook'] = Sale::getBook($uuid);
         $data['bookbus'] = Sale::getBookBus($uuid);
+        $bookpayment = Sale::getBookPayment($uuid);
+        $data['bookpayment'] = $bookpayment;
+        $data['totalpayment'] = $bookpayment->sum('amount');
 
         return view('sale::book.detail', $data);
+    }
+
+    public function addBookPayment(Request $request, $uuid)
+    {
+        $credentials = $request->validate([
+            'amount'      => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'file'        => ['required', 'file'],
+        ]);
+
+        $path = 'uploads/images/bookpayment';
+        $transfer_file_name = '-';
+        
+        if ($image = $request->file('file')){
+            $transfer_file_name = 'BKP'.time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $image->move($path, $transfer_file_name);
+        }
+
+        $filepathname = $path.'/'.$transfer_file_name;
+
+        $saveData = [
+            'uuid' => generateUuid(),
+            'book_uuid' => $uuid,
+            'amount' => numberClearence($request->amount),
+            'description' => $request->description,
+            'file' => $filepathname,
+        ];
+
+        $savePayment = Sale::saveBookPayment($saveData);
+
+        if ($savePayment) {
+            return back()->with('success', 'Pembayaran tersimpan!');
+        }
+
+        return back()->with('failed', 'Pembayaran gagal tersimpan!');
     }
 }

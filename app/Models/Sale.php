@@ -173,4 +173,20 @@ class Sale extends Model
 
         return $query;
     }
+
+    public function scopeGetBookPayment($query, $book_uuid)
+    {
+        $query = DB::table("v2_book_payment")
+            ->where('book_uuid', $book_uuid)
+            ->get();
+
+        return $query;
+    }
+
+    public function scopeSaveBookPayment($query, $data)
+    {
+        $query = DB::table("v2_book_payment")->insert($data);
+
+        return $query;
+    }
 }
