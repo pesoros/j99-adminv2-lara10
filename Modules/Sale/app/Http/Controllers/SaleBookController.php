@@ -174,7 +174,7 @@ class SaleBookController extends Controller
         $credentials = $request->validate([
             'amount'      => ['required', 'string'],
             'description' => ['required', 'string'],
-            'file'        => ['required', 'file'],
+            'file'        => ['required', 'file', 'mimes:png,jpg,pdf'],
         ]);
 
         $path = 'uploads/images/bookpayment';
@@ -193,6 +193,7 @@ class SaleBookController extends Controller
             'amount' => numberClearence($request->amount),
             'description' => $request->description,
             'file' => $filepathname,
+            'created_by' => auth()->user()->uuid,
         ];
 
         $savePayment = Sale::saveBookPayment($saveData);

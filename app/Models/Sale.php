@@ -176,7 +176,9 @@ class Sale extends Model
 
     public function scopeGetBookPayment($query, $book_uuid)
     {
-        $query = DB::table("v2_book_payment")
+        $query = DB::table("v2_book_payment AS payment")
+            ->select('payment.*', 'users.name AS created_by_name')
+            ->leftJoin("v2_users AS users", "users.uuid", "=", "payment.created_by")
             ->where('book_uuid', $book_uuid)
             ->get();
 

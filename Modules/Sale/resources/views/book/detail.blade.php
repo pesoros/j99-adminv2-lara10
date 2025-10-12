@@ -269,7 +269,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">File</label>
-                    <input type="file" name="file" id="" class="form-control">
+                    <input type="file" name="file" id="" class="form-control" accept=".png,.jpg,.pdf">
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -283,6 +283,7 @@
                       <th>No</th>
                       <th>Nominal</th>
                       <th>Deskripsi</th>
+                      <th>Dibuat Oleh</th>
                       <th>File</th>
                     </tr>
                   </thead>
@@ -292,6 +293,7 @@
                       <td>{{ $key + 1 }}</td>
                       <td>{{ formatAmount($payment->amount) }}</td>
                       <td>{{ $payment->description }}</td>
+                      <td>{{ $payment->created_by_name }}</td>
                       <td><a href="{{ asset($payment->file) }}" target="_blank" class="btn btn-primary btn-sm">Lihat</a></td>
                     </tr>
                     @endforeach
@@ -299,7 +301,7 @@
                   <tfoot>
                     <tr>
                       <th colspan="1">Total</th>
-                      <th colspan="3">{{ formatAmount($totalpayment) }}</th>
+                      <th colspan="4">{{ formatAmount($totalpayment) }}</th>
                     </tr>
                   </tfoot>
                 </table>
