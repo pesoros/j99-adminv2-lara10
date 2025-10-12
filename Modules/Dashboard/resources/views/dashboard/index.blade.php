@@ -10,7 +10,10 @@
     <ul class="timeline-events">
         @foreach ($busAgenda as $key => $bus)
             @foreach ($bus->agenda as $agenda)
-                <li data-timeline-node="{ start:'{{ $agenda->start_date }}', end:'{{ $agenda->finish_date }}', row:{{ $key + 1 }}, content:'{{ $agenda->uuid }}' }">{{ $agenda->customername }}</li>
+                <li 
+                data-timeline-node="{ start:'{{ $agenda->start_date }}', end:'{{ $agenda->finish_date }}', row:{{ $key + 1 }}, content:'{{ $agenda->uuid }}' }">
+                    {{ $agenda->busname }} - {{ $agenda->customername }}
+                </li>
             @endforeach
         @endforeach
     </ul>

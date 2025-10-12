@@ -24,7 +24,13 @@ class Dashboard extends Model
         $start = Carbon::now()->subDays(30);
         $finish = Carbon::now()->addDays(90);
         $query = DB::table("v2_book_bus AS bookbus")
-            ->select('book.uuid', 'book.start_date', 'book.finish_date', 'customer.name AS customername')
+            ->select(
+                'book.uuid', 
+                'book.start_date', 
+                'book.finish_date', 
+                'customer.name AS customername', 
+                'bus.name AS busname'
+            )
             ->join('v2_book AS book', 'book.uuid', '=', 'bookbus.book_uuid')
             ->join('v2_bus AS bus', 'bus.uuid', '=', 'bookbus.bus_uuid')
             ->leftJoin('v2_customer AS customer', 'customer.uuid', '=', 'book.customer_uuid')
