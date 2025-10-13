@@ -73,7 +73,13 @@ class Sale extends Model
                 'book.start_date',
                 'book.finish_date',
                 'book.total_price',
+                'customer.name as customer_name',
+                'city_from.name as city_from',
+                'city_to.name as city_to'
             )
+            ->leftJoin("v2_customer AS customer", "customer.uuid", "=", "book.customer_uuid")
+            ->leftJoin("v2_area_city AS city_from", "city_from.uuid", "=", "book.departure_city_uuid")
+            ->leftJoin("v2_area_city AS city_to", "city_to.uuid", "=", "book.destination_city_uuid")
             ->orderBy('book.created_at', 'desc')
             ->get();
 
