@@ -18,12 +18,12 @@
         <tr>
           <th>No</th>
           <th>Kode Booking</th>
-          <th>Nama Pelanggan</th>
+          {{-- <th>Nama Pelanggan</th>
           <th>Kota</th>
           <th>Tanggal Penjemputan</th>
           <th>Tanggal Kembali</th>
           <th>Total Harga</th>
-          <th>Aksi</th>
+          <th>Aksi</th> --}}
         </tr>
         </thead>
         <tbody>
@@ -31,11 +31,11 @@
             <tr>
               <td width="20" class="text-center">{{ intval($key) + 1 }}</td>
               <td>{{ $value->booking_code }}</td>
-              <td>{{ $value->customer_name }}</td>
+              {{-- <td>{{ $value->customer_name }}</td>
               <td>{{ $value->city_from }} - {{ $value->city_to }}</td>
               <td>{{ dateTimeFormat($value->start_date) }}</td>
               <td>{{ dateTimeFormat($value->finish_date) }}</td>
-              <td>Rp. {{ number_format($value->total_price, 0) }}</td>
+              <td>Rp. {{ number_format($value->total_price, 0) }}</td> --}}
               <td>
                 <div class="btn-group btn-block">
                   @if (permissionCheck('show')) <a href="{{ url('sale/book/show/detail/'.$value->uuid) }}" class="btn btn-warning btn-sm">Detail</a> @endif
