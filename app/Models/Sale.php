@@ -136,12 +136,10 @@ class Sale extends Model
                 'customer.email AS customer_email',
                 'customer.phone AS customer_phone',
                 'customer.address AS customer_address',
-                'city_from.name as city_from',
-                'city_to.name as city_to'
+                'book.departure_city_uuid',
+                'book.destination_city_uuid',
             )
             ->leftJoin("v2_customer AS customer", "customer.uuid", "=", "book.customer_uuid")
-            ->leftJoin("v2_area_city AS city_from", "city_from.uuid", "=", "book.departure_city_uuid")
-            ->leftJoin("v2_area_city AS city_to", "city_to.uuid", "=", "book.destination_city_uuid")
             ->where('book.uuid', $uuid)
             ->orderBy('book.created_at')
             ->first();
@@ -184,6 +182,16 @@ class Sale extends Model
     public function scopeSaveBookPayment($query, $data)
     {
         $query = DB::table("v2_book_payment")->insert($data);
+
+        return $query;
+    }
+
+    public function scopeGetCity($query, $uuid)
+    {
+        $query = DB::table("v2_area_city")
+            ->select('uuid', 'name')
+            ->where('uuid', $uuid)
+            ->first();
 
         return $query;
     }

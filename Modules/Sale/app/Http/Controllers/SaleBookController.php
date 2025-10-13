@@ -159,8 +159,12 @@ class SaleBookController extends Controller
 
     public function detailBook(Request $request, $uuid)
     {
+        $book = Sale::getBook($uuid);
+        $book->city_from = Sale::getCity($book->departure_city_uuid)->name;
+        $book->city_to = Sale::getCity($book->destination_city_uuid)->name;
+
         $data['title'] = 'Detail Reservasi';
-        $data['detailBook'] = Sale::getBook($uuid);
+        $data['detailBook'] = $book;
         $data['bookbus'] = Sale::getBookBus($uuid);
         $bookpayment = Sale::getBookPayment($uuid);
         $data['bookpayment'] = $bookpayment;
