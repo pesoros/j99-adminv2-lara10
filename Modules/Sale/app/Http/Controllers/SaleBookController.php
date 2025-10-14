@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Sale;
 use App\Models\MasterData;
+use Illuminate\Support\Facades\DB;
 
 class SaleBookController extends Controller
 {
@@ -44,6 +45,17 @@ class SaleBookController extends Controller
         $dateRange = explode('-',$request->bookdate);
         $dateFrom = dateTimeRangeFormatToSave($dateRange[0]);
         $dateTo = dateTimeRangeFormatToSave($dateRange[1]);
+
+        if (!empty($request->bus)) {
+            $bookedBuses = Sale::checkBusAvailability($request->bus, $dateFrom, $dateTo);
+
+            if ($bookedBuses->isNotEmpty()) {
+                $busUuids = $bookedBuses->pluck('bus_uuid')->unique()->toArray();
+                $busNames = DB::table('v2_bus')->whereIn('uuid', $busUuids)->pluck('name')->toArray();
+                return back()->with('failed', 'Bus '.implode(', ', $busNames).' sudah dibooking pada tanggal tersebut.');
+            }
+        }
+
         $bookingCode = generateCode('JBK');
         $uuid = generateUuid();
         

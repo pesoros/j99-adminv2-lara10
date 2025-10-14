@@ -158,6 +158,18 @@ class Sale extends Model
         return $query;
     }
 
+    public static function checkBusAvailability($busUuids, $dateFrom, $dateTo)
+    {
+        return DB::table('v2_book_bus')
+            ->join('v2_book', 'v2_book_bus.book_uuid', '=', 'v2_book.uuid')
+            ->whereIn('v2_book_bus.bus_uuid', $busUuids)
+            ->where(function ($query) use ($dateFrom, $dateTo) {
+                $query->where('v2_book.start_date', '<=', $dateTo)
+                    ->where('v2_book.finish_date', '>=', $dateFrom);
+            })
+            ->get();
+    }
+
     public function scopeGetBookBus($query, $book_uuid)
     {
         $query = DB::table("v2_book_bus AS bookbus")
