@@ -164,46 +164,7 @@ class SaleBookController extends Controller
         $data['title'] = 'Detail Reservasi';
         $data['detailBook'] = $book;
         $data['bookbus'] = Sale::getBookBus($uuid);
-        $bookpayment = Sale::getBookPayment($uuid);
-        $data['bookpayment'] = $bookpayment;
-        $data['totalpayment'] = $bookpayment->sum('amount');
 
         return view('sale::book.detail', $data);
-    }
-
-    public function addBookPayment(Request $request, $uuid)
-    {
-        $credentials = $request->validate([
-            'amount'      => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'file'        => ['required', 'file', 'mimes:png,jpg,pdf'],
-        ]);
-
-        $path = 'uploads/images/bookpayment';
-        $transfer_file_name = '-';
-        
-        if ($image = $request->file('file')){
-            $transfer_file_name = 'BKP'.time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
-            $image->move($path, $transfer_file_name);
-        }
-
-        $filepathname = $path.'/'.$transfer_file_name;
-
-        $saveData = [
-            'uuid' => generateUuid(),
-            'book_uuid' => $uuid,
-            'amount' => numberClearence($request->amount),
-            'description' => $request->description,
-            'file' => $filepathname,
-            'created_by' => auth()->user()->uuid,
-        ];
-
-        $savePayment = Sale::saveBookPayment($saveData);
-
-        if ($savePayment) {
-            return back()->with('success', 'Pembayaran tersimpan!');
-        }
-
-        return back()->with('failed', 'Pembayaran gagal tersimpan!');
     }
 }
